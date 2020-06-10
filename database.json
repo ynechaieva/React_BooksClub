@@ -1,0 +1,83 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "email": "admin@gmail.com",
+      "password": "admin",
+      "isAdmin": true
+    },
+    {
+      "id": 2,
+      "username": "hermiona",
+      "email": "hermiona@gmail.com",
+      "password": "password",
+      "isAdmin": false
+    },
+    {
+      "id": 3,
+      "username": "test",
+      "email": "test@gmail.com",
+      "password": "123",
+      "isAdmin": false
+    }
+  ],
+  "books": [
+    {
+      "id": 1,
+      "name": "Book 1",
+      "author": "author 1",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "pages": 275,
+      "img": ""
+    },
+    {
+      "id": 2,
+      "name": "Book 2",
+      "author": "author 2",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "pages": 542,
+      "img": ""
+    },
+    {
+      "id": 3,
+      "name": "Book 3",
+      "author": "author 3",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "pages": 700,
+      "img": ""
+    }
+  ],
+  "archive": [
+    {
+      "id": 1,
+      "bookid": 3
+    }
+  ],
+  "votes": [
+    {
+      "id": 1,
+      "bookid": 2,
+      "userid": 3,
+      "vote": 1
+    },
+    {
+      "id": 2,
+      "bookid": 3,
+      "userid": 3,
+      "vote": 4
+    },
+    {
+      "id": 3,
+      "bookid": 1,
+      "userid": 1,
+      "vote": 1
+    },
+    {
+      "id": 4,
+      "bookid": 3,
+      "userid": 1,
+      "vote": 5
+    }
+  ]
+}

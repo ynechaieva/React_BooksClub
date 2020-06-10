@@ -1,26 +1,111 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import Register from "./components/login/register";
+import Login from "./components/login/login";
+import Archive from "./views/archive";
+import Home from "./views/home";
+import UnvotedBooks from "./views/unvoted";
+import MeetingPoint from "./views/meeting-point";
+import "./App.scss";
+import { Wrapper } from "./wrapper";
+import Cookies from "universal-cookie";
+import { COOKIE } from "./actions/types";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//images from https://ya-webdesign.com/imgdownload.html
+const cookies = new Cookies();
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  state = {
+    user: {},
+  };
+
+  changeState = (user) => {
+    this.setState({
+      user: user,
+    });
+    cookies.set(COOKIE, {
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        isAdmin: user.isAdmin,
+      },
+    });
+  };
+
+  render() {
+    return (
+      <BrowserRouter>
+        <section>
+          <Switch>
+            <Route
+              exact
+              path={"/home"}
+              render={(props) => (
+                <Wrapper
+                  activeUser={JSON.parse(localStorage.getItem("active_user"))}
+                >
+                  <Home
+                    activeUser={JSON.parse(localStorage.getItem("active_user"))}
+                  />
+                </Wrapper>
+              )}
+            />
+            <Route
+              exact
+              path={"/unvoted"}
+              render={(props) => (
+                <Wrapper>
+                  <UnvotedBooks
+                    activeUser={JSON.parse(localStorage.getItem("active_user"))}
+                  />
+                </Wrapper>
+              )}
+            />
+            <Route
+              exact
+              path={"/archive"}
+              render={(props) => (
+                <Wrapper>
+                  <Archive
+                    activeUser={JSON.parse(localStorage.getItem("active_user"))}
+                  />
+                </Wrapper>
+              )}
+            />
+            <Route
+              exact
+              path={"/place"}
+              render={(props) => (
+                <Wrapper>
+                  <MeetingPoint
+                    activeUser={JSON.parse(localStorage.getItem("active_user"))}
+                  />
+                </Wrapper>
+              )}
+            />
+            <Route
+              exact
+              path={"/"}
+              render={(props) => (
+                <Login {...props} setUser={this.changeState} />
+              )}
+            />
+            <Route
+              exact
+              path={"/register"}
+              render={(props) => (
+                <Register {...props} setUser={this.changeState} />
+              )}
+            />
+          </Switch>
+        </section>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
