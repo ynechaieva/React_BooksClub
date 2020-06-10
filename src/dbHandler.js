@@ -32,11 +32,11 @@ export class DbHandler extends Component {
       });
   };
 
-  addVote = (data) => {
+  addVote = (item) => {
     let data = JSON.stringify({
-      bookid: data.bookid,
-      userid: data.userid,
-      vote: data.vote,
+      bookid: item.bookid,
+      userid: item.userid,
+      vote: item.vote,
     });
 
     axios
