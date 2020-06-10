@@ -26,8 +26,7 @@ class UnvotedBooks extends Component {
       userid: this.props.activeUser.id,
       vote: rate,
     };
-    db.addVote(data);
-    this.props.dispatch(addVote(data));
+    db.addVote(data, (dbItem) => this.props.dispatch(addVote(dbItem)));
   };
 
   getUnvoted = () => {
@@ -67,6 +66,7 @@ class UnvotedBooks extends Component {
                 <RatingComponent
                   addNewVote={this.addNewVote}
                   bookid={elem.id}
+                  key={"rate" + elem.id}
                 />
               </>
             );

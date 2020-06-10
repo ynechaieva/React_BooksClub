@@ -31,6 +31,7 @@ export const addVote = (data) => {
   return {
     type: ADD_VOTE,
     payload: {
+      id: data.id,
       bookid: data.bookid,
       userid: data.userid,
       vote: data.vote,

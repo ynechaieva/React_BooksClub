@@ -32,7 +32,7 @@ export class DbHandler extends Component {
       });
   };
 
-  addVote = (item) => {
+  addVote = (item, reduxFunc) => {
     let data = JSON.stringify({
       bookid: item.bookid,
       userid: item.userid,
@@ -45,6 +45,7 @@ export class DbHandler extends Component {
       })
       .then(function (response) {
         console.log(JSON.stringify(response.data));
+        reduxFunc(response.data);
       })
       .catch(function (error) {
         console.log(error.response);

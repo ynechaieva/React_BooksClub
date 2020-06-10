@@ -84,6 +84,18 @@
       "userid": 3,
       "vote": 3,
       "id": 5
+    },
+    {
+      "bookid": 1,
+      "userid": 2,
+      "vote": 3,
+      "id": 6
+    },
+    {
+      "bookid": 2,
+      "userid": 2,
+      "vote": 3,
+      "id": 7
     }
   ]
 }

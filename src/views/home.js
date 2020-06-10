@@ -60,6 +60,7 @@ class Home extends Component {
                   <Book showVotes={true} book={elem} />
                 </li>
                 <button
+                  key={"btn" + elem.id}
                   type="button"
                   className="btn"
                   onClick={() => this.handleArchive(elem.id)}
