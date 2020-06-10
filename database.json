@@ -78,6 +78,12 @@
       "bookid": 3,
       "userid": 1,
       "vote": 5
+    },
+    {
+      "bookid": 1,
+      "userid": 3,
+      "vote": 3,
+      "id": 5
     }
   ]
 }

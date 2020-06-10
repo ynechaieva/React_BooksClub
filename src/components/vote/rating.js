@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import Rating from "react-rating";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import filled_star from "../../img/filled-star.png";
 import empty_star from "../../img/empty-star.png";
 import "./rating.scss";
-import { DbHandler } from "../../dbHandler";
 
-const db = new DbHandler();
 export class RatingComponent extends Component {
   constructor(props) {
     super(props);
@@ -18,13 +14,7 @@ export class RatingComponent extends Component {
   };
 
   handleRate = (rate) => {
-    var data = {
-      bookid: this.props.curr_book.id,
-      userid: this.props.activeUser.id,
-      vote: rate,
-    };
-    this.props.addNewVote(data);
-    db.addVote(data);
+    this.props.addNewVote(rate, this.props.bookid);
     this.setState({ readonly: true });
     alert("vote is saved");
   };

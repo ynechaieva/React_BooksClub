@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Book from "../components/books/book";
 import { addVote } from "../actions";
-
+import { DbHandler } from "../dbHandler";
 import "./unvoted.scss";
 import { RatingComponent } from "../components/vote/rating";
 
@@ -14,12 +14,22 @@ const mapStateToProps = (state) => {
   };
 };
 
+const db = new DbHandler();
 class UnvotedBooks extends Component {
   constructor(props) {
     super(props);
   }
 
-  addNewVote = (parameter) => this.props.dispatch(addVote(parameter));
+  addNewVote = (rate, bookid) => {
+    var data = {
+      bookid: bookid,
+      userid: this.props.activeUser.id,
+      vote: rate,
+    };
+    db.addVote(data);
+    this.props.dispatch(addVote(data));
+  };
+
   getUnvoted = () => {
     let votedByUser = this.props.votes.filter((rec) => {
       if (rec.userid == this.props.activeUser.id) {
@@ -56,8 +66,7 @@ class UnvotedBooks extends Component {
                 </li>
                 <RatingComponent
                   addNewVote={this.addNewVote}
-                  curr_book={elem}
-                  activeUser={this.props.activeUser}
+                  bookid={elem.id}
                 />
               </>
             );
