@@ -45,6 +45,20 @@ class Home extends Component {
     return activeBooks;
   };
 
+  getRate = (book) => {
+    let bookVotes = this.props.votes.filter((elem) => {
+      return elem.bookid === book.id;
+    });
+
+    if (bookVotes.length > 0) {
+      return bookVotes.reduce((sum, next) => {
+        return (sum += next.vote);
+      }, 0);
+    } else {
+      return "not voted";
+    }
+  };
+
   render() {
     const books_list = this.getNotArchived();
     return (
@@ -57,7 +71,11 @@ class Home extends Component {
                   <div className="book-image">
                     <img src={book_img} alt="book-img" />
                   </div>
-                  <Book showVotes={true} book={elem} />
+                  <Book
+                    showVotes={true}
+                    book={elem}
+                    rate={this.getRate(elem)}
+                  />
                 </li>
                 <button
                   key={"btn" + elem.id}

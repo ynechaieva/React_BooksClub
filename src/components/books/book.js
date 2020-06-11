@@ -1,42 +1,16 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import filled_star from "../../img/filled-star.png";
 
-const mapStateToProps = (state) => {
-  return {
-    users: state.users,
-    books: state.books,
-    votes: state.votes,
-    archive: state.archive,
-  };
-};
-
-class Book extends Component {
+export default class Book extends Component {
   constructor(props) {
     super(props);
   }
-
-  getRate = (book) => {
-    let bookVotes = this.props.votes.filter((elem) => {
-      return elem.bookid === book.id;
-    });
-
-    if (bookVotes.length > 0) {
-      return bookVotes.reduce((sum, next) => {
-        return (sum += next.vote);
-      }, 0);
-    } else {
-      return "not voted";
-    }
-  };
 
   render() {
     let votesDiv;
 
     if (this.props.showVotes) {
-      votesDiv = (
-        <div className="book-votes">{this.getRate(this.props.book)}</div>
-      );
+      votesDiv = <div className="book-votes">{this.props.rate}</div>;
     }
     var component = (
       <>
@@ -55,5 +29,3 @@ class Book extends Component {
     return component;
   }
 }
-
-export default connect(mapStateToProps)(Book);
