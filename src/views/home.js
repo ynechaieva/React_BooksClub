@@ -1,12 +1,22 @@
 import React, { Component } from "react";
+import "../index.scss";
 import { connect } from "react-redux";
 import Book from "../components/books/book";
-import { addToArchive, fetchBooks, fetchVotes, fetchArchive } from "../actions";
+import { FormContainer } from "../components/books/modal/form-container";
+import {
+  addToArchive,
+  addBook,
+  fetchBooks,
+  fetchVotes,
+  fetchArchive,
+} from "../actions";
 import "./home.scss";
 import { DbHandler } from "../dbHandler";
 import book_img from "../img/open-book.png";
 
 const db = new DbHandler();
+const triggerText = "add book";
+const bookUpdate = "add book";
 const mapStateToProps = (state) => {
   return {
     books: state.books,
@@ -26,9 +36,35 @@ class Home extends Component {
     this.props.dispatch(fetchArchive());
   }
 
-  handleArchive = (id) => {
-    db.addToArchive(id);
-    this.props.dispatch(addToArchive(id));
+  handleArchive = (book) => {
+    db.addToArchive(book, (dbItem) =>
+      this.props.dispatch(addToArchive(dbItem))
+    );
+    alert("book is added to archive");
+  };
+
+  onSubmit = (event) => {
+    event.preventDefault(event);
+    let newBook = {
+      name: event.target.name.value,
+      author: event.target.author.value,
+      description: event.target.description.value,
+      pages: event.target.pages.value,
+      img: "",
+    };
+    console.log(newBook);
+  };
+
+  onEdit = (event) => {
+    event.preventDefault(event);
+    let newBook = {
+      name: event.target.name.value,
+      author: event.target.author.value,
+      description: event.target.description.value,
+      pages: event.target.pages.value,
+      img: "",
+    };
+    console.log(newBook);
   };
 
   getNotArchived = () => {
@@ -63,6 +99,12 @@ class Home extends Component {
     const books_list = this.getNotArchived();
     return (
       <div className="home-page">
+        <FormContainer
+          triggerText={triggerText}
+          onSubmit={this.onSubmit}
+          book={{ name: "", author: "", description: "", pages: "", img: "" }}
+          isShown={false}
+        />
         <ul>
           {books_list.map((elem) => {
             return (
@@ -77,6 +119,11 @@ class Home extends Component {
                     rate={this.getRate(elem)}
                   />
                 </li>
+                <FormContainer
+                  triggerText={bookUpdate}
+                  onSubmit={this.onEdit}
+                  book={elem}
+                />
                 <button
                   key={"btn" + elem.id}
                   type="button"

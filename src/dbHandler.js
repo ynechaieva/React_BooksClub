@@ -25,7 +25,29 @@ export class DbHandler extends Component {
         headers: { "Content-Type": "application/json" },
       })
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        //console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error.response);
+      });
+  };
+
+  addBook = (data, reduxFunc) => {
+    let newBook = JSON.stringify({
+      name: data.name,
+      author: data.author,
+      description: data.description,
+      pages: data.pages,
+      img: data.img,
+    });
+
+    axios
+      .post(booksUrl, newBook, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then(function (response) {
+        //console.log(JSON.stringify(response.data));
+        reduxFunc(response.data);
       })
       .catch(function (error) {
         console.log(error.response);
@@ -44,7 +66,7 @@ export class DbHandler extends Component {
         headers: { "Content-Type": "application/json" },
       })
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        //console.log(JSON.stringify(response.data));
         reduxFunc(response.data);
       })
       .catch(function (error) {
@@ -52,16 +74,15 @@ export class DbHandler extends Component {
       });
   };
 
-  addToArchive = (id) => {
-    let record = JSON.stringify({ bookid: id });
-    //console.log(record);
-
+  addToArchive = (bookid, reduxFunc) => {
+    let record = JSON.stringify({ bookid: bookid });
     axios
       .post(archiveUrl, record, {
         headers: { "Content-Type": "application/json" },
       })
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        //console.log(JSON.stringify(response.data));
+        reduxFunc(response.data);
       })
       .catch(function (error) {
         console.log(error.response);

@@ -1,4 +1,4 @@
-import { FETCH_USERS, ADD_NEW_USER, ACTIVE_USER } from "../actions/types";
+import { FETCH_USERS, ADD_NEW_USER } from "../actions/types";
 
 export function usersReducer(state = [], action) {
   switch (action.type) {

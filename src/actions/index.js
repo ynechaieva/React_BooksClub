@@ -5,6 +5,7 @@ import {
   FETCH_ARCHIVE,
   ADD_TO_ARCHIVE,
   ADD_NEW_USER,
+  ADD_NEW_BOOK,
   ADD_VOTE,
 } from "./types.js";
 import axios from "axios";
@@ -39,11 +40,26 @@ export const addVote = (data) => {
   };
 };
 
-export const addToArchive = (id) => {
+export const addBook = (data) => {
+  return {
+    type: ADD_NEW_BOOK,
+    payload: {
+      id: data.id,
+      name: data.name,
+      author: data.author,
+      description: data.description,
+      pages: data.pages,
+      img: data.img,
+    },
+  };
+};
+
+export const addToArchive = (data) => {
   return {
     type: ADD_TO_ARCHIVE,
     payload: {
-      bookid: id,
+      id: data.id,
+      bookid: data.bookid,
     },
   };
 };

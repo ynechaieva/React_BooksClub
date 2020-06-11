@@ -4,7 +4,6 @@ import "./style.scss";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { DbHandler } from "../../dbHandler";
-//import store from "../../store";
 import { fetchUsers, addUser } from "../../actions";
 
 const db = new DbHandler();
@@ -44,6 +43,8 @@ export class Register extends Component {
         password: this.state.password,
         isAdmin: false,
       };
+
+      //db.addUser(newUser, (dbItem) => this.props.dispatch(addUser(dbItem)));
 
       this.setState({
         isLogged: true,
