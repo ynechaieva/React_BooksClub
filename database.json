@@ -166,6 +166,36 @@
       "userid": 1,
       "vote": 2,
       "id": 5
+    },
+    {
+      "dateid": 4,
+      "userid": 1,
+      "vote": 1,
+      "id": 6
+    },
+    {
+      "dateid": 2,
+      "userid": 2,
+      "vote": 2,
+      "id": 7
+    },
+    {
+      "dateid": 4,
+      "userid": 2,
+      "vote": 2,
+      "id": 8
+    },
+    {
+      "dateid": 3,
+      "userid": 2,
+      "vote": 3,
+      "id": 9
+    },
+    {
+      "dateid": 1,
+      "userid": 2,
+      "vote": 3,
+      "id": 10
     }
   ]
 }

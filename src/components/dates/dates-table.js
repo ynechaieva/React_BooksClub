@@ -3,11 +3,31 @@ import Date from "./date";
 import "./dates-table.scss";
 
 export class DatesTable extends Component {
+  mostRatedDate = () => {
+    let rate = 0;
+    let ratedDate = "";
+    let arr = [];
+    this.props.dates.map((date) => {
+      let tmpRate = this.props.votedDates.filter(
+        (rec) => rec.dateid === date.id
+      ).length;
+      if (tmpRate > rate) {
+        rate = tmpRate;
+        ratedDate = date.date;
+      }
+    });
+
+    console.log(ratedDate);
+    return ratedDate;
+  };
+
   render() {
     var component = (
       <>
         <div className="dates-table">
-          <label>Most rated date: </label>
+          <div className="most-rated-date">
+            Most rated date: {this.mostRatedDate()}
+          </div>
           <ul className="dates-list">
             {this.props.dates.map((elem) => {
               let rate = this.props.votedDates.filter((rec) => {
