@@ -3,6 +3,30 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  width: 100%;
+}
+
+.unvoted-greetings {
+  width: 100%;
+  font-size: 32px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 0 0 1.5em;
+
+  .sheriff {
+    width: 25%;
+  }
+
+  .sheriff img {
+    width: 100%;
+  }
+
+  .sheriff-text {
+    margin-left: 1.5em;
+  }
 }
 
 .rating-container .icon {

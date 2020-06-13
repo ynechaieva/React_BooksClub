@@ -131,7 +131,7 @@ class Home extends Component {
         <ul>
           {books_list.map((elem) => {
             return (
-              <>
+              <div className="full-book-item">
                 <li key={elem.id} id={elem.id} className="book-item">
                   <div className="book-image">
                     <img src={book_img} alt="book-img" />
@@ -152,14 +152,14 @@ class Home extends Component {
                   // }}
                 />
                 <button
-                  key={"btn" + elem.id}
+                  key={"archive-btn" + elem.id}
                   type="button"
                   className="btn"
                   onClick={() => this.handleArchive(elem.id)}
                 >
                   archive book
                 </button>
-              </>
+              </div>
             );
           })}
         </ul>

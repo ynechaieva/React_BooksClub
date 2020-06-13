@@ -1,13 +1,17 @@
 import {
   FETCH_BOOKS,
   FETCH_USERS,
-  FETCH_VOTES,
+  FETCH_VOTED_BOOKS,
   FETCH_ARCHIVE,
+  FETCH_DATES,
+  FETCH_VOTED_DATES,
   ADD_TO_ARCHIVE,
   ADD_NEW_USER,
   ADD_NEW_BOOK,
   UPDATE_BOOK,
   ADD_VOTE,
+  ADD_DATE,
+  ADD_VOTE_FOR_DATE,
 } from "./types.js";
 import axios from "axios";
 
@@ -15,6 +19,8 @@ const booksUrl = "http://localhost:3000/books";
 const usersUrl = "http://localhost:3000/users";
 const votesUrl = "http://localhost:3000/votes";
 const archiveUrl = "http://localhost:3000/archive";
+const datesUrl = "http://localhost:3000/dates";
+const votedDatesUrl = "http://localhost:3000/voted-dates";
 
 export const addUser = (data) => {
   return {
@@ -35,6 +41,28 @@ export const addVote = (data) => {
     payload: {
       id: data.id,
       bookid: data.bookid,
+      userid: data.userid,
+      vote: data.vote,
+    },
+  };
+};
+
+export const addDate = (data) => {
+  return {
+    type: ADD_DATE,
+    payload: {
+      id: data.id,
+      date: data.date,
+    },
+  };
+};
+
+export const addVotedDate = (data) => {
+  return {
+    type: ADD_VOTE_FOR_DATE,
+    payload: {
+      id: data.id,
+      dateid: data.dateid,
       userid: data.userid,
       vote: data.vote,
     },
@@ -127,7 +155,7 @@ export const fetchVotes = () => {
       })
       .then((data) => {
         dispatch({
-          type: FETCH_VOTES,
+          type: FETCH_VOTED_BOOKS,
           payload: data,
         });
       })
@@ -147,6 +175,44 @@ export const fetchArchive = () => {
       .then((data) => {
         dispatch({
           type: FETCH_ARCHIVE,
+          payload: data,
+        });
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+};
+
+export const fetchDates = () => {
+  return (dispatch) => {
+    return axios
+      .get(datesUrl)
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        dispatch({
+          type: FETCH_DATES,
+          payload: data,
+        });
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+};
+
+export const fetchVotedDates = () => {
+  return (dispatch) => {
+    return axios
+      .get(votedDatesUrl)
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        dispatch({
+          type: FETCH_VOTED_DATES,
           payload: data,
         });
       })

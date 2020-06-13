@@ -1,24 +1,33 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./meeting-point.scss";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import format from "date-fns/format";
+import { DatesTable } from "../components/dates/dates-table";
+import { fetchDates, addDate, fetchVotedDates, addVotedDate } from "../actions";
+import { DbHandler } from "../dbHandler";
 
-export class Results extends Component {
-  render() {
-    return <div>here will be table with dates</div>;
-  }
-}
+const db = new DbHandler();
 
-export default class MeetingPoint extends Component {
-  constructor(props) {
-    super(props);
-  }
+const mapStateToProps = (state) => {
+  return {
+    users: state.users,
+    dates: state.dates,
+    votedDates: state.votedDates,
+  };
+};
 
+class MeetingPoint extends Component {
   state = {
     startDate: new Date(),
-    showDatesArea: false,
+    showDatesArea: true,
   };
+
+  componentDidMount() {
+    this.props.dispatch(fetchDates());
+    this.props.dispatch(fetchVotedDates());
+  }
 
   handleChange = (value) => {
     this.setState({
@@ -28,20 +37,34 @@ export default class MeetingPoint extends Component {
 
   onClick = () => {
     const valueOfInput = format(this.state.startDate, "yyyy/MM/dd");
-    //setShowResults(true);
-    this.setState({
-      showDatesArea: true,
-    });
+    if (
+      this.props.dates.filter((rec) => rec.date === valueOfInput).length > 0
+    ) {
+      alert("Date is already present in the list");
+    } else {
+      db.addDate(valueOfInput, (dbItem) =>
+        this.props.dispatch(addDate(dbItem))
+      );
+    }
+  };
+
+  getMostRatedDate = () => {};
+
+  getRate = (e, dateid) => {
+    e.preventDefault(e);
+    const rate = 0;
+    this.props.votedDates.map((rec) => {});
+    return rate;
   };
 
   render() {
     return (
       <div className="meeting-point-page">
         <div className="calendar-area">
-          <label>Please, select date to meet for discussion:</label>
+          <label>Select date to discussion a book:</label>
           <DatePicker
             selected={this.state.startDate}
-            dateFormat="yyyy/MM/dd" //"MMMM d, yyyy"
+            dateFormat="yyyy/MM/dd"
             className="datepicker"
             minDate={new Date()}
             onSelect={(value) => this.handleChange(value)}
@@ -49,12 +72,18 @@ export default class MeetingPoint extends Component {
           />
           <div>
             <button type="submit" className="btn" onClick={this.onClick}>
-              select
+              select date
             </button>
-            {this.state.showDatesArea ? <Results /> : null}
           </div>
+        </div>
+        <div className="dates-area">
+          {this.state.showDatesArea ? (
+            <DatesTable dates={this.props.dates} />
+          ) : null}
         </div>
       </div>
     );
   }
 }
+
+export default connect(mapStateToProps)(MeetingPoint);

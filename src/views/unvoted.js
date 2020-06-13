@@ -5,6 +5,7 @@ import { addVote } from "../actions";
 import { DbHandler } from "../dbHandler";
 import "./unvoted.scss";
 import { RatingComponent } from "../components/vote/rating";
+import sheriff from "../img/sheriff.png";
 
 const mapStateToProps = (state) => {
   return {
@@ -56,6 +57,12 @@ class UnvotedBooks extends Component {
 
     return (
       <div className="unvoted-page">
+        <div className="unvoted-greetings">
+          <div className="sheriff">
+            <img src={sheriff} />
+          </div>
+          <div className="sheriff-text">Vote or die</div>
+        </div>
         <ul>
           {unvoted.map((elem) => {
             return (

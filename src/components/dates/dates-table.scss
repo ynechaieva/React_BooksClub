@@ -1,0 +1,41 @@
+.dates-table {
+  width: 100%;
+  font-size: 21px;
+}
+
+.dates-list {
+  list-style: none;
+  padding-left: 5px;
+
+  .thumb-down img,
+  .thumb-up img {
+    width: 2em;
+    height: 2em;
+  }
+
+  .date-vote {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    .shown-date {
+      align-self: flex-end;
+      padding-bottom: 7px;
+      padding-right: 0.5em;
+    }
+
+    .thumb-up {
+      position: relative;
+
+      .data-rate {
+        font-size: 12px;
+        border-radius: 50%;
+        background-color: lightgrey;
+        position: absolute;
+        top: -6px;
+        right: -12px;
+        padding: 2.5px 3px;
+      }
+    }
+  }
+}

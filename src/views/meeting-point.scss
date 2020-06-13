@@ -4,12 +4,18 @@
   box-sizing: border-box;
   margin-left: 2em;
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  .dates-area {
+    margin-left: 5em;
+  }
 }
 
 .calendar-area {
   .btn {
     padding: 5px 1em;
-    //font-size: 16px;
   }
 
   .react-datepicker {
@@ -17,6 +23,6 @@
   }
 
   label {
-    font-size: 13px;
+    font-size: 16px;
   }
 }
