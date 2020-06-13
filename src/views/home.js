@@ -13,7 +13,7 @@ import {
 } from "../actions";
 import "./home.scss";
 import { DbHandler } from "../dbHandler";
-import book_img from "../img/open-book.png";
+import book_img from "../img/notebook.png";
 
 const db = new DbHandler();
 const addNewBookText = "add book";

@@ -63,18 +63,18 @@ class UnvotedBooks extends Component {
           </div>
           <div className="sheriff-text">Vote or die</div>
         </div>
-        <ul>
+        <ul className="books-list">
           {unvoted.map((elem) => {
             return (
               <>
                 <li key={elem.id} id={elem.id} className="book-item">
                   <Book showVotes={false} book={elem} />
+                  <RatingComponent
+                    addNewVote={this.addNewVote}
+                    bookid={elem.id}
+                    key={"rate" + elem.id}
+                  />
                 </li>
-                <RatingComponent
-                  addNewVote={this.addNewVote}
-                  bookid={elem.id}
-                  key={"rate" + elem.id}
-                />
               </>
             );
           })}

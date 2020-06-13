@@ -1,20 +1,35 @@
 .unvoted-page {
-  font-size: 16px;
+  font-size: 18px;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   width: 100%;
 }
 
+.books-list {
+  list-style: none;
+  box-sizing: border-box;
+
+  .book-item {
+    margin: 1em 2em 1em 2em;
+    padding: 1em 2em 1em 2em;
+    box-shadow: 5px 10px;
+    border: 1px solid black;
+
+    .book-name {
+      font-weight: bold;
+    }
+  }
+}
+
 .unvoted-greetings {
-  width: 100%;
   font-size: 32px;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin: 0 0 0 1.5em;
+  margin: 0 0 0 3em;
 
   .sheriff {
     width: 25%;
@@ -29,9 +44,13 @@
   }
 }
 
-.rating-container .icon {
-  width: 1.5em;
-  height: 1.5em;
-  padding-right: 5px;
-  margin-top: 0.5em;
+.rating-container {
+  //margin-bottom: 2em;
+
+  .icon {
+    width: 1.5em;
+    height: 1.5em;
+    padding-right: 5px;
+    margin-top: 0.5em;
+  }
 }

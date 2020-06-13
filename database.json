@@ -106,6 +106,12 @@
       "userid": 1,
       "vote": 3,
       "id": 4
+    },
+    {
+      "bookid": 4,
+      "userid": 1,
+      "vote": 3,
+      "id": 5
     }
   ],
   "dates": [

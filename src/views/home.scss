@@ -15,14 +15,11 @@
   box-sizing: border-box;
   margin: 2em 5em 2em 5em;
 
-  .edit-btn,
-  .archive-btn {
-    font-size: 16px;
-  }
-
   .book-image {
-    width: 30em;
-
+    min-width: 3em;
+    min-height: 3em;
+    //width: 5em;
+    height: 5em;
     img {
       width: 100%;
       height: 100%;

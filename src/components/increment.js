@@ -1,7 +1,7 @@
 import React from "react";
 import "./vote.scss";
 
-export class VoteUpDown extends React.Component {
+export class Increment extends React.Component {
   constructor() {
     super();
 
@@ -10,7 +10,7 @@ export class VoteUpDown extends React.Component {
     };
 
     this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
+    //this.decrement = this.decrement.bind(this);
   }
 
   render() {
