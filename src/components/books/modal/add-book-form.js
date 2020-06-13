@@ -14,7 +14,10 @@ const Form = ({ onSubmit, book }) => {
     <>
       <div className="base-container">
         <div className="header"> Add new book </div>
-        <form className="form content" onSubmit={onSubmit}>
+        <form
+          className="form content"
+          onSubmit={(event) => onSubmit(event, book.id)}
+        >
           <div className="form-group">
             <label htmlFor="name">Book name</label>
             <input

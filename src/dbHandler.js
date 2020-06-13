@@ -32,6 +32,21 @@ export class DbHandler extends Component {
       });
   };
 
+  updateBook = (book, reduxFunc) => {
+    let url = booksUrl + "/" + book.id;
+    //console.log(url);
+    axios
+      .put(url, book, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then(function (response) {
+        reduxFunc(response.data);
+      })
+      .catch(function (error) {
+        console.log(error.response);
+      });
+  };
+
   addBook = (data, reduxFunc) => {
     let newBook = JSON.stringify({
       name: data.name,
@@ -46,7 +61,6 @@ export class DbHandler extends Component {
         headers: { "Content-Type": "application/json" },
       })
       .then(function (response) {
-        //console.log(JSON.stringify(response.data));
         reduxFunc(response.data);
       })
       .catch(function (error) {

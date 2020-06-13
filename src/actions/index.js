@@ -6,6 +6,7 @@ import {
   ADD_TO_ARCHIVE,
   ADD_NEW_USER,
   ADD_NEW_BOOK,
+  UPDATE_BOOK,
   ADD_VOTE,
 } from "./types.js";
 import axios from "axios";
@@ -43,6 +44,20 @@ export const addVote = (data) => {
 export const addBook = (data) => {
   return {
     type: ADD_NEW_BOOK,
+    payload: {
+      id: data.id,
+      name: data.name,
+      author: data.author,
+      description: data.description,
+      pages: data.pages,
+      img: data.img,
+    },
+  };
+};
+
+export const updateBook = (data) => {
+  return {
+    type: UPDATE_BOOK,
     payload: {
       id: data.id,
       name: data.name,

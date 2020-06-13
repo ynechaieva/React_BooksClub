@@ -6,6 +6,7 @@ import { FormContainer } from "../components/books/modal/form-container";
 import {
   addToArchive,
   addBook,
+  updateBook,
   fetchBooks,
   fetchVotes,
   fetchArchive,
@@ -15,8 +16,8 @@ import { DbHandler } from "../dbHandler";
 import book_img from "../img/open-book.png";
 
 const db = new DbHandler();
-const triggerText = "add book";
-const bookUpdate = "add book";
+const addNewBookText = "add book";
+const updateBookText = "edit book";
 const mapStateToProps = (state) => {
   return {
     books: state.books,
@@ -52,19 +53,38 @@ class Home extends Component {
       pages: event.target.pages.value,
       img: "",
     };
-    console.log(newBook);
+
+    if (
+      this.props.books.filter((rec) => rec.name === newBook.name).length > 0
+    ) {
+      //this.addBookRef.closeModal();
+      alert("Book with such name is already exist!");
+    } else {
+      db.addBook(newBook, (dbItem) => this.props.dispatch(addBook(dbItem)));
+      this.addBookRef.closeModal();
+    }
   };
 
-  onEdit = (event) => {
+  onEdit = (event, id) => {
     event.preventDefault(event);
-    let newBook = {
+
+    let updatedBook = {
       name: event.target.name.value,
       author: event.target.author.value,
       description: event.target.description.value,
       pages: event.target.pages.value,
+      id: id,
       img: "",
     };
-    console.log(newBook);
+
+    if (updatedBook.id === "undefined") {
+      alert("Something goes wrong, can't update this book!");
+    } else {
+      db.updateBook(updatedBook, (dbItem) =>
+        this.props.dispatch(updateBook(dbItem))
+      );
+      alert("Book is updated!");
+    }
   };
 
   getNotArchived = () => {
@@ -100,10 +120,13 @@ class Home extends Component {
     return (
       <div className="home-page">
         <FormContainer
-          triggerText={triggerText}
+          key={"add-book-modal"}
+          triggerText={addNewBookText}
           onSubmit={this.onSubmit}
           book={{ name: "", author: "", description: "", pages: "", img: "" }}
-          isShown={false}
+          ref={(ref) => {
+            this.addBookRef = ref;
+          }}
         />
         <ul>
           {books_list.map((elem) => {
@@ -120,9 +143,13 @@ class Home extends Component {
                   />
                 </li>
                 <FormContainer
-                  triggerText={bookUpdate}
+                  key={"edit-book-modal" + elem.id}
+                  triggerText={updateBookText}
                   onSubmit={this.onEdit}
                   book={elem}
+                  // ref={(ref) => {
+                  //   eval("this." + elem.name + "=ref;");
+                  // }}
                 />
                 <button
                   key={"btn" + elem.id}

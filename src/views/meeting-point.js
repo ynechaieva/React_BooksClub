@@ -1,25 +1,60 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import "./meeting-point.scss";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import format from "date-fns/format";
 
-const mapStateToProps = (state) => {
-  return {
-    users: state.books,
-  };
-};
+export class Results extends Component {
+  render() {
+    return <div>here will be table with dates</div>;
+  }
+}
 
-class MeetingPoint extends Component {
+export default class MeetingPoint extends Component {
   constructor(props) {
     super(props);
   }
 
+  state = {
+    startDate: new Date(),
+    showDatesArea: false,
+  };
+
+  handleChange = (value) => {
+    this.setState({
+      startDate: value,
+    });
+  };
+
+  onClick = () => {
+    const valueOfInput = format(this.state.startDate, "yyyy/MM/dd");
+    //setShowResults(true);
+    this.setState({
+      showDatesArea: true,
+    });
+  };
+
   render() {
     return (
       <div className="meeting-point-page">
-        <input placeholder={new Date().toLocaleDateString("en-US")} />
+        <div className="calendar-area">
+          <label>Please, select date to meet for discussion:</label>
+          <DatePicker
+            selected={this.state.startDate}
+            dateFormat="yyyy/MM/dd" //"MMMM d, yyyy"
+            className="datepicker"
+            minDate={new Date()}
+            onSelect={(value) => this.handleChange(value)}
+            inline
+          />
+          <div>
+            <button type="submit" className="btn" onClick={this.onClick}>
+              select
+            </button>
+            {this.state.showDatesArea ? <Results /> : null}
+          </div>
+        </div>
       </div>
     );
   }
 }
-
-export default connect(mapStateToProps)(MeetingPoint);
