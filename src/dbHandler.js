@@ -6,6 +6,7 @@ const usersUrl = "http://localhost:3000/users";
 const votesUrl = "http://localhost:3000/votes";
 const archiveUrl = "http://localhost:3000/archive";
 const datesUrl = "http://localhost:3000/dates";
+const votedDatesUrl = "http://localhost:3000/voted-dates";
 
 export class DbHandler extends Component {
   constructor(props) {
@@ -82,6 +83,26 @@ export class DbHandler extends Component {
       })
       .then(function (response) {
         //console.log(JSON.stringify(response.data));
+        reduxFunc(response.data);
+      })
+      .catch(function (error) {
+        console.log(error.response);
+      });
+  };
+
+  addVotedDate = (item, reduxFunc) => {
+    let data = JSON.stringify({
+      id: item.id,
+      dateid: item.dateid,
+      userid: item.userid,
+      vote: item.vote,
+    });
+
+    axios
+      .post(votedDatesUrl, data, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then(function (response) {
         reduxFunc(response.data);
       })
       .catch(function (error) {

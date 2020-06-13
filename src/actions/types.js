@@ -11,5 +11,5 @@ export const ADD_NEW_BOOK = "ADD_NEW_BOOK";
 export const UPDATE_BOOK = "UPDATE_BOOK";
 export const ADD_VOTE = "ADD_VOTE";
 export const ADD_DATE = "ADD_DATE";
-export const ADD_VOTE_FOR_DATE = "ADD_VOTE_FOR_DATE";
+export const ADD_VOTED_DATE = "ADD_VOTED_DATE";
 export const COOKIE = "BOOK_CLUB";

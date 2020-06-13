@@ -35,7 +35,7 @@ class MeetingPoint extends Component {
     });
   };
 
-  onClick = () => {
+  addDate = () => {
     const valueOfInput = format(this.state.startDate, "yyyy/MM/dd");
     if (
       this.props.dates.filter((rec) => rec.date === valueOfInput).length > 0
@@ -50,10 +50,35 @@ class MeetingPoint extends Component {
 
   getMostRatedDate = () => {};
 
+  addVoteForDate = (e, rate, date) => {
+    e.preventDefault();
+    let data = {
+      dateid: date.id,
+      userid: this.props.activeUser.id,
+      vote: rate,
+    };
+    let votedByActiveUser = this.props.votedDates.filter(
+      (rec) => rec.userid === this.props.activeUser.id
+    );
+    if (votedByActiveUser.filter((rec) => rec.dateid === date.id).length > 0) {
+      alert("You have already voted for this date");
+    } else {
+      db.addVotedDate(data, (dbItem) =>
+        this.props.dispatch(addVotedDate(dbItem))
+      );
+      alert("vote is added");
+    }
+  };
+
   getRate = (e, dateid) => {
     e.preventDefault(e);
     const rate = 0;
-    this.props.votedDates.map((rec) => {});
+    this.props.votedDates.map((rec) => {
+      if (rec.dateid === dateid) {
+        rate += rec.vote;
+      }
+    });
+    console.log(rate);
     return rate;
   };
 
@@ -71,14 +96,19 @@ class MeetingPoint extends Component {
             inline
           />
           <div>
-            <button type="submit" className="btn" onClick={this.onClick}>
+            <button type="submit" className="btn" onClick={this.addDate}>
               select date
             </button>
           </div>
         </div>
         <div className="dates-area">
           {this.state.showDatesArea ? (
-            <DatesTable dates={this.props.dates} />
+            <DatesTable
+              dates={this.props.dates}
+              getRate={this.getRate}
+              votedDates={this.props.votedDates}
+              addVote={this.addVoteForDate}
+            />
           ) : null}
         </div>
       </div>

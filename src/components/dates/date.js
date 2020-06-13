@@ -6,10 +6,19 @@ export default class Date extends Component {
     var component = (
       <>
         <div className="date-vote">
-          <div className="shown-date">{this.props.date}</div>
+          <div className="shown-date">{this.props.currDate.date}</div>
           <div className="thumb-up">
-            <img src={agree_thumb} onClick={this.addVoteForDate} />
-            <lable className="data-rate">+5</lable>
+            <img
+              src={agree_thumb}
+              onClick={(event) =>
+                this.props.addVote(
+                  event,
+                  this.props.rate + 1,
+                  this.props.currDate
+                )
+              }
+            />
+            <lable className="data-rate">+{this.props.rate}</lable>
           </div>
         </div>
       </>

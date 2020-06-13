@@ -10,9 +10,16 @@ export class DatesTable extends Component {
           <label>Most rated date: </label>
           <ul className="dates-list">
             {this.props.dates.map((elem) => {
+              let rate = this.props.votedDates.filter((rec) => {
+                return rec.dateid === elem.id;
+              }).length;
               return (
                 <li key={elem.id} className="date-item">
-                  <Date date={elem.date} />
+                  <Date
+                    currDate={elem}
+                    rate={rate}
+                    addVote={this.props.addVote}
+                  />
                 </li>
               );
             })}

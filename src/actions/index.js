@@ -11,7 +11,7 @@ import {
   UPDATE_BOOK,
   ADD_VOTE,
   ADD_DATE,
-  ADD_VOTE_FOR_DATE,
+  ADD_VOTED_DATE,
 } from "./types.js";
 import axios from "axios";
 
@@ -59,7 +59,7 @@ export const addDate = (data) => {
 
 export const addVotedDate = (data) => {
   return {
-    type: ADD_VOTE_FOR_DATE,
+    type: ADD_VOTED_DATE,
     payload: {
       id: data.id,
       dateid: data.dateid,
