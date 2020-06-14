@@ -4,6 +4,7 @@ import { Footer } from "./components/footer";
 import "./components/nav/nav.scss";
 import Cookies from "universal-cookie";
 import { COOKIE } from "./actions/types";
+import "./wrapper.scss";
 
 const cookies = new Cookies();
 const Wrapper = (props) => {

@@ -56,7 +56,7 @@ class UnvotedBooks extends Component {
     const unvoted = this.getUnvoted();
 
     return (
-      <div className="unvoted-page">
+      <div className="unvoted-page content-wrap">
         <div className="unvoted-greetings">
           <div className="sheriff">
             <img src={sheriff} />

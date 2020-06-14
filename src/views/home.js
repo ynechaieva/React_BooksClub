@@ -118,7 +118,7 @@ class Home extends Component {
   render() {
     const books_list = this.getNotArchived();
     return (
-      <div className="home-page">
+      <div className="home-page content-wrap">
         <FormContainer
           key={"add-book-modal"}
           triggerText={addNewBookText}

@@ -32,7 +32,7 @@ class Archive extends Component {
     const archive_list = this.getArchived();
 
     return (
-      <div className="archive-page">
+      <div className="archive-page content-wrap">
         <ul>
           {archive_list.map((elem) => {
             return (

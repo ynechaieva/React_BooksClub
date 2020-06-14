@@ -84,7 +84,7 @@ class MeetingPoint extends Component {
 
   render() {
     return (
-      <div className="meeting-point-page">
+      <div className="meeting-point-page content-wrap">
         <div className="calendar-area">
           <label>Select date to discussion a book:</label>
           <DatePicker
