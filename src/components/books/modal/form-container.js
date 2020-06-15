@@ -47,6 +47,7 @@ export class FormContainer extends Component {
         />
         {this.state.isShown ? (
           <Modal
+            red
             onSubmit={this.props.onSubmit}
             modalRef={(n) => (this.modal = n)}
             buttonRef={(n) => (this.closeButton = n)}

@@ -29,6 +29,7 @@ const mapStateToProps = (state) => {
 class Home extends Component {
   constructor(props) {
     super(props);
+    this.editRef = [];
   }
 
   componentDidMount() {
@@ -57,7 +58,6 @@ class Home extends Component {
     if (
       this.props.books.filter((rec) => rec.name === newBook.name).length > 0
     ) {
-      //this.addBookRef.closeModal();
       alert("Book with such name is already exist!");
     } else {
       db.addBook(newBook, (dbItem) => this.props.dispatch(addBook(dbItem)));
@@ -84,6 +84,10 @@ class Home extends Component {
         this.props.dispatch(updateBook(dbItem))
       );
       alert("Book is updated!");
+
+      this.editRef
+        .filter((elem) => elem[0] != null && elem[1] === id)[0][0]
+        .closeModal();
     }
   };
 
@@ -147,9 +151,9 @@ class Home extends Component {
                   triggerText={updateBookText}
                   onSubmit={this.onEdit}
                   book={elem}
-                  // ref={(ref) => {
-                  //   eval("this." + elem.name + "=ref;");
-                  // }}
+                  ref={(ref) => {
+                    this.editRef.push([ref, elem.id]);
+                  }}
                 />
                 <button
                   key={"archive-btn" + elem.id}

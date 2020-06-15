@@ -32,11 +32,11 @@
       "img": ""
     },
     {
-      "id": 2,
       "name": "Book 2",
       "author": "author 2",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "pages": 542,
+      "pages": "542",
+      "id": 2,
       "img": ""
     },
     {
@@ -70,6 +70,22 @@
       "pages": "1205",
       "id": 6,
       "img": ""
+    },
+    {
+      "name": "",
+      "author": "",
+      "description": "",
+      "pages": "",
+      "id": 7,
+      "img": ""
+    },
+    {
+      "name": "fff",
+      "author": "",
+      "description": "",
+      "pages": "",
+      "img": "",
+      "id": 8
     }
   ],
   "archive": [
