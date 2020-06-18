@@ -44,7 +44,7 @@
       "name": "Book 3",
       "author": "author 3",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "pages": 700,
+      "pages": "700",
       "img": ""
     },
     {
@@ -52,7 +52,7 @@
       "name": "Book 4",
       "author": "author 4",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "pages": 573,
+      "pages": "573",
       "img": ""
     },
     {
@@ -60,7 +60,7 @@
       "name": "Book 5",
       "author": "author 5",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "pages": 278,
+      "pages": "278",
       "img": ""
     },
     {
@@ -70,22 +70,6 @@
       "pages": "1205",
       "id": 6,
       "img": ""
-    },
-    {
-      "name": "",
-      "author": "",
-      "description": "",
-      "pages": "",
-      "id": 7,
-      "img": ""
-    },
-    {
-      "name": "fff",
-      "author": "",
-      "description": "",
-      "pages": "",
-      "img": "",
-      "id": 8
     }
   ],
   "archive": [
@@ -122,12 +106,6 @@
       "userid": 1,
       "vote": 3,
       "id": 4
-    },
-    {
-      "bookid": 4,
-      "userid": 1,
-      "vote": 3,
-      "id": 5
     }
   ],
   "dates": [
@@ -136,20 +114,8 @@
       "date": "2020/06/17"
     },
     {
-      "id": 2,
-      "date": "2020/06/15"
-    },
-    {
-      "date": "2020/06/21",
-      "id": 3
-    },
-    {
-      "date": "2020/06/16",
-      "id": 4
-    },
-    {
-      "date": "2020/06/27",
-      "id": 5
+      "date": "2020/06/19",
+      "id": 2
     }
   ],
   "voted-dates": [
@@ -164,54 +130,6 @@
       "dateid": 1,
       "userid": 3,
       "vote": 1
-    },
-    {
-      "id": 3,
-      "dateid": 2,
-      "userid": 1,
-      "vote": 1
-    },
-    {
-      "dateid": 3,
-      "userid": 3,
-      "vote": 1,
-      "id": 4
-    },
-    {
-      "dateid": 3,
-      "userid": 1,
-      "vote": 2,
-      "id": 5
-    },
-    {
-      "dateid": 4,
-      "userid": 1,
-      "vote": 1,
-      "id": 6
-    },
-    {
-      "dateid": 2,
-      "userid": 2,
-      "vote": 2,
-      "id": 7
-    },
-    {
-      "dateid": 4,
-      "userid": 2,
-      "vote": 2,
-      "id": 8
-    },
-    {
-      "dateid": 3,
-      "userid": 2,
-      "vote": 3,
-      "id": 9
-    },
-    {
-      "dateid": 1,
-      "userid": 2,
-      "vote": 3,
-      "id": 10
     }
   ]
 }

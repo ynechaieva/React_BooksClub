@@ -7,7 +7,65 @@
 
   .btn {
     padding: 5px 1em;
-    margin-bottom: 2em;
+    margin: 10px;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  .sort-filter-wrapper {
+    font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid black;
+    justify-content: space-between;
+    margin: 0;
+    padding-bottom: 1em;
+
+    .sortBy {
+      display: flex;
+      flex-direction: column;
+      margin-left: 1em;
+    }
+
+    .filterBy {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+
+      .Dropdown-root,
+      .Dropdown-control {
+        width: 200px;
+        font-size: 18px;
+        height: 34px;
+        align-items: center;
+      }
+
+      .Dropdown-control {
+        border: 1px solid black;
+      }
+
+      .btn {
+        box-sizing: border-box;
+        font-size: 18px;
+        align-self: center;
+        margin: 0 10px 0 10px;
+      }
+
+      .filter-input {
+        width: 200px;
+        font-size: 18px;
+        height: 34px;
+        padding: 0 10px 0 10px;
+      }
+
+      label {
+        padding: 0 10px 0 10px;
+      }
+    }
   }
 }
 

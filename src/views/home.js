@@ -14,10 +14,14 @@ import {
 import "./home.scss";
 import { DbHandler } from "../dbHandler";
 import book_img from "../img/notebook.png";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 
 const db = new DbHandler();
 const addNewBookText = "add book";
 const updateBookText = "edit book";
+const options = ["name", "author", "description", "pages", "rate"];
+
 const mapStateToProps = (state) => {
   return {
     books: state.books,
@@ -91,8 +95,8 @@ class Home extends Component {
     }
   };
 
-  getNotArchived = () => {
-    let activeBooks = this.props.books.filter((book) => {
+  getNotArchived = (books) => {
+    let activeBooks = books.filter((book) => {
       if (
         this.props.archive.filter((elem) => elem.bookid === book.id).length > 0
       ) {
@@ -119,10 +123,165 @@ class Home extends Component {
     }
   };
 
+  buildBooksList = () => {
+    const books_list = this.getNotArchived(this.props.books);
+    return books_list.map((rec) => {
+      let rate = this.getRate(rec);
+      return {
+        name: rec.name,
+        author: rec.author,
+        description: rec.description,
+        pages: rec.pages,
+        id: rec.id,
+        rate: rate,
+        img: rec.img,
+      };
+    });
+  };
+
+  sortBy = (param) => {
+    const books = this.buildBooksList();
+    let arr = [];
+    switch (param) {
+      case "rate":
+        arr = books.sort((a, b) => b.rate - a.rate);
+        return arr;
+      case "pages":
+        arr = books.sort((a, b) => b.pages - a.pages);
+        return arr;
+      default:
+        return books;
+    }
+  };
+
+  state = {
+    books_list: this.buildBooksList(),
+    selectedSortOption: "",
+    filterInputVal: "",
+    filterDropdown: "",
+  };
+
+  handleChangeFilter = (e) => {
+    this.setState({ filterInputVal: e.target.value });
+  };
+
+  handleChangeDropdown = (e) => {
+    this.setState({ filterDropdown: e.value });
+  };
+
+  filterData = (e) => {
+    let arr = [];
+    if (this.state.filterDropdown != "" && this.state.filterInputVal != "") {
+      switch (this.state.filterDropdown) {
+        case "name":
+          arr = this.state.books_list.filter((rec) => {
+            console.log(rec.name.includes(this.state.filterInputVal));
+            return rec.name.includes(this.state.filterInputVal);
+          });
+          this.setState({ books_list: arr });
+          break;
+        case "author":
+          arr = this.state.books_list.filter((rec) => {
+            console.log(rec.author.includes(this.state.filterInputVal));
+            return rec.author.includes(this.state.filterInputVal);
+          });
+          this.setState({ books_list: arr });
+          break;
+        case "description":
+          arr = this.state.books_list.filter((rec) => {
+            console.log(rec.description.includes(this.state.filterInputVal));
+            return rec.description.includes(this.state.filterInputVal);
+          });
+          this.setState({ books_list: arr });
+          break;
+        case "pages":
+          arr = this.state.books_list.filter((rec) => {
+            console.log(rec.pages.includes(this.state.filterInputVal));
+            return rec.pages.includes(this.state.filterInputVal);
+          });
+          this.setState({ books_list: arr });
+          break;
+        case "rate":
+          arr = this.state.books_list.filter((rec) => {
+            //console.log(rec.rate.includes(this.state.filterInputVal));
+            return rec.rate == this.state.filterInputVal;
+          });
+          this.setState({ books_list: arr });
+          break;
+      }
+    } else {
+      alert("Not all input filter fields are set");
+    }
+  };
+
+  clearAll = () => {
+    this.setState({
+      books_list: this.sortBy(this.state.selectedSortOption),
+      filterInputVal: "",
+      filterDropdown: "",
+    });
+  };
+
   render() {
-    const books_list = this.getNotArchived();
     return (
       <div className="home-page content-wrap">
+        <div className="sort-filter-wrapper">
+          <div className="sortBy radio">
+            <label>
+              <input
+                type="radio"
+                value="rate"
+                checked={this.state.selectedSortOption === "rate"}
+                onChange={() => {
+                  this.setState({
+                    books_list: this.sortBy("rate"),
+                    selectedSortOption: "rate",
+                  });
+                }}
+              />
+              sort by rate
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="rate"
+                checked={this.state.selectedSortOption === "pages"}
+                onChange={() => {
+                  this.setState({
+                    books_list: this.sortBy("pages"),
+                    selectedSortOption: "pages",
+                  });
+                }}
+              />
+              sort by pages
+            </label>
+          </div>
+          <div className="filterBy">
+            <label>Filter by</label>
+            <Dropdown
+              className="dropdown"
+              options={options}
+              value={this.state.filterDropdown}
+              onChange={this.handleChangeDropdown}
+              placeholder="select an option"
+            />
+            <label> with value</label>
+            <input
+              className="filter-input"
+              value={this.state.filterInputVal}
+              onChange={this.handleChangeFilter}
+            />
+            <button className="btn filter-btn" onClick={this.filterData}>
+              Filter
+            </button>
+            <button
+              className="btn cler-sort-filter-btn"
+              onClick={this.clearAll}
+            >
+              Clear
+            </button>
+          </div>
+        </div>
         <FormContainer
           key={"add-book-modal"}
           triggerText={addNewBookText}
@@ -131,20 +290,17 @@ class Home extends Component {
           ref={(ref) => {
             this.addBookRef = ref;
           }}
+          btn-style={{ color: "red" }}
         />
         <ul>
-          {books_list.map((elem) => {
+          {this.state.books_list.map((elem) => {
             return (
               <div className="full-book-item">
                 <li key={elem.id} id={elem.id} className="book-item">
-                  <div className="book-image">
+                  {/* <div className="book-image">
                     <img src={book_img} alt="book-img" />
-                  </div>
-                  <Book
-                    showVotes={true}
-                    book={elem}
-                    rate={this.getRate(elem)}
-                  />
+                  </div> */}
+                  <Book showVotes={true} book={elem} rate={elem.rate} />
                 </li>
                 <FormContainer
                   key={"edit-book-modal" + elem.id}
