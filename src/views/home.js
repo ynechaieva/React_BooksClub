@@ -34,6 +34,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.booksIsNotLoaded = true;
+    this.votesIsNotLoaded = true;
     this.editRef = [];
     this.state = {
       books_state: [],
@@ -41,6 +42,13 @@ class Home extends Component {
       filterInputVal: "",
       filterDropdown: "",
     };
+
+    if (window.performance) {
+      if (performance.navigation.type == 1) {
+        this.booksIsNotLoaded = true;
+        this.votesIsNotLoaded = true;
+      }
+    }
   }
 
   componentDidMount() {
@@ -130,32 +138,33 @@ class Home extends Component {
     }
   };
 
-  // buildBooksList = () => {
-  //   const books_list = this.getNotArchived();
-  //   let arr = books_list.map((rec) => {
-  //     let rate = this.getRate(rec);
-  //     return {
-  //       name: rec.name,
-  //       author: rec.author,
-  //       description: rec.description,
-  //       pages: rec.pages,
-  //       id: rec.id,
-  //       rate: rate,
-  //       img: rec.img,
-  //     };
-  //   });
-  //   return arr;
-  // };
+  buildBooksList = () => {
+    let arr = this.state.books_state.map((rec) => {
+      let rate = this.getRate(rec);
+      return {
+        name: rec.name,
+        author: rec.author,
+        description: rec.description,
+        pages: rec.pages,
+        id: rec.id,
+        rate: rate,
+        img: rec.img,
+      };
+    });
+    return arr;
+  };
 
   sortBy = (param) => {
     let arr = [];
     switch (param) {
-      case "rate":
-        arr = this.state.books_state.sort((a, b) => b.rate - a.rate);
-        return arr;
       case "pages":
         arr = this.state.books_state.sort((a, b) => b.pages - a.pages);
-        return arr;
+        this.setState({ books_state: arr, selectedSortOption: "pages" });
+        break;
+      case "rate":
+        arr = this.state.books_state.sort((a, b) => b.rate - a.rate);
+        this.setState({ books_state: arr, selectedSortOption: "rate" });
+        break;
     }
   };
 
@@ -220,13 +229,25 @@ class Home extends Component {
   //   });
   // };
 
-  render() {
+  componentDidUpdate() {
     let books_list = this.getNotArchived();
     if (this.booksIsNotLoaded && books_list.length !== 0) {
-      this.setState({ books_state: books_list });
+      this.state.books_state = books_list;
+      this.forceUpdate();
       this.booksIsNotLoaded = false;
     }
+    if (
+      !this.booksIsNotLoaded &&
+      this.votesIsNotLoaded &&
+      this.props.votes.length !== 0
+    ) {
+      this.state.books_state = this.buildBooksList();
+      this.forceUpdate();
+      this.votesIsNotLoaded = false;
+    }
+  }
 
+  render() {
     return (
       <div className="home-page content-wrap">
         <div className="sort-filter-wrapper">
@@ -236,7 +257,7 @@ class Home extends Component {
                 type="radio"
                 value="rate"
                 checked={this.state.selectedSortOption === "rate"}
-                onChange={() => this.sortBy("rate")}
+                onClick={() => this.sortBy("rate")}
               />
               sort by rate
             </label>
@@ -245,7 +266,8 @@ class Home extends Component {
                 type="radio"
                 value="pages"
                 checked={this.state.selectedSortOption === "pages"}
-                onChange={this.sortBy("pages")}
+                //onChange={() => this.sortBy("pages")}
+                onClick={() => this.sortBy("pages")}
               />
               sort by pages
             </label>
@@ -297,11 +319,7 @@ class Home extends Component {
                   {/* <div className="book-image">
                     <img src={book_img} alt="book-img" />
                   </div> */}
-                  <Book
-                    showVotes={true}
-                    book={elem}
-                    rate={this.getRate(elem)}
-                  />
+                  <Book showVotes={true} book={elem} rate={elem.rate} />
                 </li>
                 <FormContainer
                   key={"edit-book-modal" + elem.id}
