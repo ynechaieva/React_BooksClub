@@ -37,7 +37,6 @@ class Nav extends Component {
         <div className="nav-user">
           <li id="nav-user" className="nav-list-item">
             user: {this.props.activeUser.username}
-            {/* User: {cookie.get(COOKIE).user.username} */}
           </li>
           <li id="logout" className="nav-list-item">
             <a href="/" onClick={this.handleLogout}>

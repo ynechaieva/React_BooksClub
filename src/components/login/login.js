@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import loginImg from "../../img/books.png";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import "./style.scss";
+import "./style-login-register.scss";
 import { fetchUsers } from "../../actions";
 
 const mapStateToProps = (state) => {
@@ -88,12 +88,12 @@ class Login extends Component {
                 </div>
               </div>
             </div>
-            <div className="footer">
+            <div className="login-btn-area">
               <button type="button" className="btn" onClick={this.handleLogin}>
                 Login
               </button>
               <label>Do not have an account yet?</label>
-              <a href="/register">Register</a>
+              <a href="/register">Register &gt;&gt;</a>
             </div>
           </div>
         )}

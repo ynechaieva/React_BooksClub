@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import loginImg from "../../img/books.png";
-import "./style.scss";
+import "./style-login-register.scss";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { DbHandler } from "../../dbHandler";
@@ -117,7 +117,7 @@ export class Register extends Component {
                 </div>
               </div>
             </div>
-            <div className="footer">
+            <div className="register-btn-area">
               <button
                 type="button"
                 className="btn"

@@ -6,7 +6,7 @@
 
   .header {
     font-size: 24px;
-    font-family: "Open Sans", sans-serif;
+    margin-top: 1em;
   }
 
   .content {
@@ -43,7 +43,6 @@
           height: 37px;
           padding: 0px 10px;
           font-size: 16px;
-          font-family: "Open Sans", sans-serif;
           background-color: #f3f3f3;
           border: 0;
           border-radius: 4px;
@@ -58,19 +57,24 @@
     }
   }
 
-  .footer {
-    width: 19em;
+  .register-btn-area,
+  .login-btn-area {
     display: flex;
     flex-direction: column;
     margin-top: 2em;
+    margin-bottom: 2em;
+
+    .btn {
+      align-self: center;
+    }
 
     label {
-      margin-top: 1em;
-      align-self: start;
+      margin-top: 2em;
+      align-self: center;
     }
 
     a {
-      align-self: start;
+      align-self: center;
     }
 
     a.back {

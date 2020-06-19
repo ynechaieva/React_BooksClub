@@ -33,7 +33,14 @@ const mapStateToProps = (state) => {
 class Home extends Component {
   constructor(props) {
     super(props);
+    this.booksIsNotLoaded = true;
     this.editRef = [];
+    this.state = {
+      books_state: [],
+      selectedSortOption: "",
+      filterInputVal: "",
+      filterDropdown: "",
+    };
   }
 
   componentDidMount() {
@@ -50,7 +57,7 @@ class Home extends Component {
   };
 
   onSubmit = (event) => {
-    event.preventDefault(event);
+    event.preventDefault();
     let newBook = {
       name: event.target.name.value,
       author: event.target.author.value,
@@ -95,8 +102,8 @@ class Home extends Component {
     }
   };
 
-  getNotArchived = (books) => {
-    let activeBooks = books.filter((book) => {
+  getNotArchived = () => {
+    let activeBooks = this.props.books.filter((book) => {
       if (
         this.props.archive.filter((elem) => elem.bookid === book.id).length > 0
       ) {
@@ -123,106 +130,103 @@ class Home extends Component {
     }
   };
 
-  buildBooksList = () => {
-    const books_list = this.getNotArchived(this.props.books);
-    return books_list.map((rec) => {
-      let rate = this.getRate(rec);
-      return {
-        name: rec.name,
-        author: rec.author,
-        description: rec.description,
-        pages: rec.pages,
-        id: rec.id,
-        rate: rate,
-        img: rec.img,
-      };
-    });
-  };
+  // buildBooksList = () => {
+  //   const books_list = this.getNotArchived();
+  //   let arr = books_list.map((rec) => {
+  //     let rate = this.getRate(rec);
+  //     return {
+  //       name: rec.name,
+  //       author: rec.author,
+  //       description: rec.description,
+  //       pages: rec.pages,
+  //       id: rec.id,
+  //       rate: rate,
+  //       img: rec.img,
+  //     };
+  //   });
+  //   return arr;
+  // };
 
   sortBy = (param) => {
-    const books = this.buildBooksList();
     let arr = [];
     switch (param) {
       case "rate":
-        arr = books.sort((a, b) => b.rate - a.rate);
+        arr = this.state.books_state.sort((a, b) => b.rate - a.rate);
         return arr;
       case "pages":
-        arr = books.sort((a, b) => b.pages - a.pages);
+        arr = this.state.books_state.sort((a, b) => b.pages - a.pages);
         return arr;
-      default:
-        return books;
     }
   };
 
-  state = {
-    books_list: this.buildBooksList(),
-    selectedSortOption: "",
-    filterInputVal: "",
-    filterDropdown: "",
-  };
+  // handleChangeFilter = (e) => {
+  //   this.setState({ filterInputVal: e.target.value });
+  // };
 
-  handleChangeFilter = (e) => {
-    this.setState({ filterInputVal: e.target.value });
-  };
+  // handleChangeDropdown = (e) => {
+  //   this.setState({ filterDropdown: e.value });
+  // };
 
-  handleChangeDropdown = (e) => {
-    this.setState({ filterDropdown: e.value });
-  };
+  // filterData = (e, books) => {
+  //   let arr = [];
+  //   if (this.state.filterDropdown != "" && this.state.filterInputVal != "") {
+  //     switch (this.state.filterDropdown) {
+  //       case "name":
+  //         arr = books.filter((rec) => {
+  //           console.log(rec.name.includes(this.state.filterInputVal));
+  //           return rec.name.includes(this.state.filterInputVal);
+  //         });
+  //         this.setState({ filtered_list: arr });
+  //         break;
+  //       case "author":
+  //         arr = books.filter((rec) => {
+  //           console.log(rec.author.includes(this.state.filterInputVal));
+  //           return rec.author.includes(this.state.filterInputVal);
+  //         });
+  //         this.setState({ filtered_list: arr });
+  //         break;
+  //       case "description":
+  //         arr = books.filter((rec) => {
+  //           console.log(rec.description.includes(this.state.filterInputVal));
+  //           return rec.description.includes(this.state.filterInputVal);
+  //         });
+  //         this.setState({ filtered_list: arr });
+  //         break;
+  //       case "pages":
+  //         arr = books.filter((rec) => {
+  //           console.log(rec.pages.includes(this.state.filterInputVal));
+  //           return rec.pages.includes(this.state.filterInputVal);
+  //         });
+  //         this.setState({ filtered_list: arr });
+  //         break;
+  //       case "rate":
+  //         arr = books.filter((rec) => {
+  //           return rec.rate == this.state.filterInputVal;
+  //         });
+  //         this.setState({ filtered_list: arr });
+  //         break;
+  //     }
+  //   } else {
+  //     alert("Not all input filter fields are set");
+  //   }
+  // };
 
-  filterData = (e) => {
-    let arr = [];
-    if (this.state.filterDropdown != "" && this.state.filterInputVal != "") {
-      switch (this.state.filterDropdown) {
-        case "name":
-          arr = this.state.books_list.filter((rec) => {
-            console.log(rec.name.includes(this.state.filterInputVal));
-            return rec.name.includes(this.state.filterInputVal);
-          });
-          this.setState({ books_list: arr });
-          break;
-        case "author":
-          arr = this.state.books_list.filter((rec) => {
-            console.log(rec.author.includes(this.state.filterInputVal));
-            return rec.author.includes(this.state.filterInputVal);
-          });
-          this.setState({ books_list: arr });
-          break;
-        case "description":
-          arr = this.state.books_list.filter((rec) => {
-            console.log(rec.description.includes(this.state.filterInputVal));
-            return rec.description.includes(this.state.filterInputVal);
-          });
-          this.setState({ books_list: arr });
-          break;
-        case "pages":
-          arr = this.state.books_list.filter((rec) => {
-            console.log(rec.pages.includes(this.state.filterInputVal));
-            return rec.pages.includes(this.state.filterInputVal);
-          });
-          this.setState({ books_list: arr });
-          break;
-        case "rate":
-          arr = this.state.books_list.filter((rec) => {
-            //console.log(rec.rate.includes(this.state.filterInputVal));
-            return rec.rate == this.state.filterInputVal;
-          });
-          this.setState({ books_list: arr });
-          break;
-      }
-    } else {
-      alert("Not all input filter fields are set");
-    }
-  };
-
-  clearAll = () => {
-    this.setState({
-      books_list: this.sortBy(this.state.selectedSortOption),
-      filterInputVal: "",
-      filterDropdown: "",
-    });
-  };
+  // clearFilter = () => {
+  //   this.setState({
+  //     filtered_list: [],
+  //     selectedSortOption: "",
+  //     filterInputVal: "",
+  //     filterDropdown: "",
+  //   });
+  // };
 
   render() {
+    let books_list = this.getNotArchived();
+    if (this.booksIsNotLoaded && books_list.length !== 0) {
+      this.setState({ books_state: books_list });
+      this.booksIsNotLoaded = false;
+    }
+
     return (
       <div className="home-page content-wrap">
         <div className="sort-filter-wrapper">
@@ -232,26 +236,16 @@ class Home extends Component {
                 type="radio"
                 value="rate"
                 checked={this.state.selectedSortOption === "rate"}
-                onChange={() => {
-                  this.setState({
-                    books_list: this.sortBy("rate"),
-                    selectedSortOption: "rate",
-                  });
-                }}
+                onChange={() => this.sortBy("rate")}
               />
               sort by rate
             </label>
             <label>
               <input
                 type="radio"
-                value="rate"
+                value="pages"
                 checked={this.state.selectedSortOption === "pages"}
-                onChange={() => {
-                  this.setState({
-                    books_list: this.sortBy("pages"),
-                    selectedSortOption: "pages",
-                  });
-                }}
+                onChange={this.sortBy("pages")}
               />
               sort by pages
             </label>
@@ -262,21 +256,24 @@ class Home extends Component {
               className="dropdown"
               options={options}
               value={this.state.filterDropdown}
-              onChange={this.handleChangeDropdown}
+              //onChange={this.handleChangeDropdown}
               placeholder="select an option"
             />
             <label> with value</label>
             <input
               className="filter-input"
               value={this.state.filterInputVal}
-              onChange={this.handleChangeFilter}
+              //onChange={this.handleChangeFilter}
             />
-            <button className="btn filter-btn" onClick={this.filterData}>
+            <button
+              className="btn filter-btn"
+              // onClick={this.filterData}
+            >
               Filter
             </button>
             <button
               className="btn cler-sort-filter-btn"
-              onClick={this.clearAll}
+              //onClick={this.clearFilter}
             >
               Clear
             </button>
@@ -293,14 +290,18 @@ class Home extends Component {
           btn-style={{ color: "red" }}
         />
         <ul>
-          {this.state.books_list.map((elem) => {
+          {this.state.books_state.map((elem) => {
             return (
               <div className="full-book-item">
                 <li key={elem.id} id={elem.id} className="book-item">
                   {/* <div className="book-image">
                     <img src={book_img} alt="book-img" />
                   </div> */}
-                  <Book showVotes={true} book={elem} rate={elem.rate} />
+                  <Book
+                    showVotes={true}
+                    book={elem}
+                    rate={this.getRate(elem)}
+                  />
                 </li>
                 <FormContainer
                   key={"edit-book-modal" + elem.id}
