@@ -194,66 +194,65 @@ class Home extends Component {
     }
   };
 
-  // handleChangeFilter = (e) => {
-  //   this.setState({ filterInputVal: e.target.value });
-  // };
+  handleChangeFilter = (e) => {
+    this.setState({ filterInputVal: e.target.value });
+  };
 
-  // handleChangeDropdown = (e) => {
-  //   this.setState({ filterDropdown: e.value });
-  // };
+  handleChangeDropdown = (e) => {
+    this.setState({ filterDropdown: e.value });
+  };
 
-  // filterData = (e, books) => {
-  //   let arr = [];
-  //   if (this.state.filterDropdown != "" && this.state.filterInputVal != "") {
-  //     switch (this.state.filterDropdown) {
-  //       case "name":
-  //         arr = books.filter((rec) => {
-  //           console.log(rec.name.includes(this.state.filterInputVal));
-  //           return rec.name.includes(this.state.filterInputVal);
-  //         });
-  //         this.setState({ filtered_list: arr });
-  //         break;
-  //       case "author":
-  //         arr = books.filter((rec) => {
-  //           console.log(rec.author.includes(this.state.filterInputVal));
-  //           return rec.author.includes(this.state.filterInputVal);
-  //         });
-  //         this.setState({ filtered_list: arr });
-  //         break;
-  //       case "description":
-  //         arr = books.filter((rec) => {
-  //           console.log(rec.description.includes(this.state.filterInputVal));
-  //           return rec.description.includes(this.state.filterInputVal);
-  //         });
-  //         this.setState({ filtered_list: arr });
-  //         break;
-  //       case "pages":
-  //         arr = books.filter((rec) => {
-  //           console.log(rec.pages.includes(this.state.filterInputVal));
-  //           return rec.pages.includes(this.state.filterInputVal);
-  //         });
-  //         this.setState({ filtered_list: arr });
-  //         break;
-  //       case "rate":
-  //         arr = books.filter((rec) => {
-  //           return rec.rate == this.state.filterInputVal;
-  //         });
-  //         this.setState({ filtered_list: arr });
-  //         break;
-  //     }
-  //   } else {
-  //     alert("Not all input filter fields are set");
-  //   }
-  // };
+  filterData = () => {
+    let arr = [];
+    if (this.state.filterDropdown != "" && this.state.filterInputVal != "") {
+      switch (this.state.filterDropdown) {
+        case "name":
+          arr = this.state.books_state.filter((rec) => {
+            return rec.name.includes(this.state.filterInputVal);
+          });
+          this.setState({ books_state: arr });
+          break;
+        case "author":
+          arr = this.state.books_state.filter((rec) => {
+            return rec.author.includes(this.state.filterInputVal);
+          });
+          this.setState({ books_state: arr });
+          break;
+        case "description":
+          arr = this.state.books_state.filter((rec) => {
+            return rec.description.includes(this.state.filterInputVal);
+          });
+          this.setState({ books_state: arr });
+          break;
+        case "pages":
+          arr = this.state.books_state.filter((rec) => {
+            return rec.pages.includes(this.state.filterInputVal);
+          });
+          this.setState({ books_state: arr });
+          break;
+        case "rate":
+          arr = this.state.books_state.filter((rec) => {
+            return rec.rate == this.state.filterInputVal;
+          });
+          this.setState({ books_state: arr });
+          break;
+      }
+    } else {
+      alert("Not all input filter fields are set");
+    }
+  };
 
-  // clearFilter = () => {
-  //   this.setState({
-  //     filtered_list: [],
-  //     selectedSortOption: "",
-  //     filterInputVal: "",
-  //     filterDropdown: "",
-  //   });
-  // };
+  clearFilter = () => {
+    this.setState({
+      //books_state: [],
+      selectedSortOption: "",
+      filterInputVal: "",
+      filterDropdown: "",
+    });
+    this.booksIsNotLoaded = true;
+    this.votesIsNotLoaded = true;
+    this.archivesIsNotLoaded = true;
+  };
 
   componentDidUpdate() {
     let books_list = this.props.books;
@@ -317,7 +316,7 @@ class Home extends Component {
               className="dropdown"
               options={options}
               value={this.state.filterDropdown}
-              //onChange={this.handleChangeDropdown}
+              onChange={this.handleChangeDropdown}
               placeholder="select an option"
             />
           </div>
@@ -326,21 +325,15 @@ class Home extends Component {
             <input
               className="f-input"
               value={this.state.filterInputVal}
-              //onChange={this.handleChangeFilter}
+              onChange={this.handleChangeFilter}
             />
           </div>
         </div>
         <div className="filter-buttons">
-          <button
-            className="btn"
-            // onClick={this.filterData}
-          >
+          <button className="btn" onClick={() => this.filterData()}>
             Filter
           </button>
-          <button
-            className="btn"
-            //onClick={this.clearFilter}
-          >
+          <button className="btn" onClick={this.clearFilter}>
             Clear
           </button>
         </div>
