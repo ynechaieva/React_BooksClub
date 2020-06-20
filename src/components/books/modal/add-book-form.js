@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-const Form = ({ onSubmit, book }) => {
+const Form = ({ onSubmit, book, header }) => {
   const [currBook, setBook] = useState(book);
-
+  const newHeader = header;
   const handleChange = (event) => {
     setBook({
       ...currBook,
@@ -13,7 +13,7 @@ const Form = ({ onSubmit, book }) => {
   var component = (
     <>
       <div className="base-container">
-        <div className="header"> Add new book </div>
+        <div className="header"> {newHeader}</div>
         <form
           className="form content"
           onSubmit={(event) => onSubmit(event, book.id)}
@@ -63,7 +63,7 @@ const Form = ({ onSubmit, book }) => {
             />
           </div>
           <div className="form-group">
-            <button type="btn form-control" className="btn" type="submit">
+            <button type="form-control" className="btn" type="submit">
               Submit
             </button>
           </div>

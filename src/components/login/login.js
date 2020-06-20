@@ -12,10 +12,6 @@ const mapStateToProps = (state) => {
 };
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.dispatch(fetchUsers());
   }
@@ -29,8 +25,8 @@ class Login extends Component {
   handleLogin = (e) => {
     this.props.users.map((item) => {
       if (
-        this.state.username == item.username &&
-        this.state.password == item.password
+        this.state.username === item.username &&
+        this.state.password === item.password
       ) {
         this.setState({
           isLogged: true,

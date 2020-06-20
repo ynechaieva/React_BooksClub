@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Register from "./components/login/register";
 import Login from "./components/login/login";
 import Archive from "./views/archive";
@@ -14,10 +14,6 @@ import { COOKIE } from "./actions/types";
 //images from https://ya-webdesign.com/imgdownload.html
 const cookies = new Cookies();
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     user: {},
   };

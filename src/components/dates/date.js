@@ -10,6 +10,7 @@ export default class Date extends Component {
           <div className="thumb-up">
             <img
               src={agree_thumb}
+              alt=""
               onClick={(event) =>
                 this.props.addVote(
                   event,

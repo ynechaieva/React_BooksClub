@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { Component } from "react";
+import { Component } from "react";
 
 const booksUrl = "http://localhost:3000/books";
 const usersUrl = "http://localhost:3000/users";
@@ -9,10 +9,6 @@ const datesUrl = "http://localhost:3000/dates";
 const votedDatesUrl = "http://localhost:3000/voted-dates";
 
 export class DbHandler extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   addUser = (user) => {
     let register = JSON.stringify({
       id: user.id,

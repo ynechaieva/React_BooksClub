@@ -1,11 +1,6 @@
 import React, { Component } from "react";
-import filled_star from "../../img/filled-star.png";
 
 export default class Book extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     let votesDiv;
 

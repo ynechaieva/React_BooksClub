@@ -20,6 +20,13 @@
       "email": "test@gmail.com",
       "password": "123",
       "isAdmin": false
+    },
+    {
+      "id": 4,
+      "username": "ynechaieva",
+      "email": "ynechaieva@outlook.com",
+      "password": "222",
+      "isAdmin": false
     }
   ],
   "books": [
@@ -64,20 +71,36 @@
       "img": ""
     },
     {
-      "name": "new test book 6",
-      "author": "author 6",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "pages": "1200",
+      "name": "New test book",
+      "author": "some author",
+      "description": "test descr",
+      "pages": "1103",
       "img": "",
       "id": 6
     },
     {
-      "name": "fff book",
+      "name": "fff",
+      "author": "some author fff",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "pages": "1200",
+      "img": "",
+      "id": 7
+    },
+    {
+      "name": "rt",
       "author": "some author",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "pages": "600",
-      "id": 7,
-      "img": ""
+      "pages": "rt",
+      "img": "",
+      "id": 8
+    },
+    {
+      "name": "7",
+      "author": "7",
+      "description": "7",
+      "pages": "7",
+      "img": "",
+      "id": 9
     }
   ],
   "archive": [
@@ -90,8 +113,15 @@
       "id": 2
     },
     {
-      "bookid": 6,
       "id": 3
+    },
+    {
+      "bookid": 7,
+      "id": 4
+    },
+    {
+      "bookid": 9,
+      "id": 5
     }
   ],
   "votes": [
@@ -121,14 +151,14 @@
     },
     {
       "bookid": 6,
-      "userid": 3,
-      "vote": 3,
+      "userid": 4,
+      "vote": 2,
       "id": 5
     },
     {
-      "bookid": 7,
-      "userid": 3,
-      "vote": 2,
+      "bookid": 1,
+      "userid": 4,
+      "vote": 4,
       "id": 6
     }
   ],
@@ -142,7 +172,7 @@
       "id": 2
     },
     {
-      "date": "2020/06/24",
+      "date": "2020/06/20",
       "id": 3
     }
   ],
@@ -160,16 +190,22 @@
       "vote": 1
     },
     {
-      "dateid": 2,
-      "userid": 3,
+      "dateid": 3,
+      "userid": 4,
       "vote": 1,
       "id": 3
     },
     {
-      "dateid": 3,
-      "userid": 3,
-      "vote": 1,
+      "dateid": 1,
+      "userid": 4,
+      "vote": 3,
       "id": 4
+    },
+    {
+      "dateid": 2,
+      "userid": 4,
+      "vote": 1,
+      "id": 5
     }
   ]
 }

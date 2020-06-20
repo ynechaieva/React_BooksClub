@@ -17,10 +17,6 @@ const mapStateToProps = (state) => {
 
 const db = new DbHandler();
 class UnvotedBooks extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   addNewVote = (rate, bookid) => {
     var data = {
       bookid: bookid,
@@ -32,7 +28,7 @@ class UnvotedBooks extends Component {
 
   getUnvoted = () => {
     let votedByUser = this.props.votes.filter((rec) => {
-      if (rec.userid == this.props.activeUser.id) {
+      if (rec.userid === this.props.activeUser.id) {
         return rec;
       }
     });
@@ -59,7 +55,7 @@ class UnvotedBooks extends Component {
       <div className="unvoted-page content-wrap">
         <div className="greetings">
           <div className="image">
-            <img src={sheriff} />
+            <img src={sheriff} alt="" />
           </div>
           <div className="image-text">Vote or die</div>
         </div>

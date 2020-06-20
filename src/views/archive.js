@@ -12,10 +12,6 @@ const mapStateToProps = (state) => {
 };
 
 class Archive extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   getArchived = () => {
     let archivedBooks = this.props.books.filter((book) => {
       if (
@@ -37,7 +33,7 @@ class Archive extends Component {
       <div className="archive-page content-wrap">
         <div className="greetings">
           <div className="image">
-            <img src={image} />
+            <img src={image} alt="" />
           </div>
           <div className="image-text">Archived books</div>
         </div>

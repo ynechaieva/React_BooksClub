@@ -48,6 +48,7 @@ class Home extends Component {
         this.booksIsNotLoaded = true;
         this.votesIsNotLoaded = true;
         this.archivesIsNotLoaded = true;
+        this.editRef = [];
       }
     }
   }
@@ -59,15 +60,22 @@ class Home extends Component {
   }
 
   handleArchive = (bookid) => {
-    db.addToArchive(bookid, (dbItem) =>
-      this.props.dispatch(addToArchive(dbItem))
-    );
+    if (bookid == undefined) {
+      alert(
+        "Something goes wrong, can't add book to archive! Please, try again."
+      );
+      window.location.reload(true);
+    } else {
+      db.addToArchive(bookid, (dbItem) =>
+        this.props.dispatch(addToArchive(dbItem))
+      );
 
-    let tmp = this.state.books_state.filter((rec) => rec.id !== bookid);
-    this.setState({
-      books_state: [...tmp],
-    });
-    alert("book is added to archive");
+      let tmp = this.state.books_state.filter((rec) => rec.id !== bookid);
+      this.setState({
+        books_state: [...tmp],
+      });
+      alert("book is added to archive");
+    }
   };
 
   onSubmit = (event) => {
@@ -89,6 +97,7 @@ class Home extends Component {
       newBook = { ...newBook, rate: "not voted" };
       this.setState({ books_state: [...this.state.books_state, newBook] });
       this.addBookRef.closeModal();
+      //window.location.reload(true);
     }
   };
 
@@ -104,8 +113,11 @@ class Home extends Component {
     };
 
     let newRate = this.getRate(updatedBook);
-    if (updatedBook.id === "undefined") {
-      alert("Something goes wrong, can't update this book!");
+    if (updatedBook.id == undefined) {
+      alert(
+        "Something goes wrong, can't update this book! Please, close the modal window and try again."
+      );
+      window.location.reload(true);
     } else {
       db.updateBook(updatedBook, (dbItem) =>
         this.props.dispatch(updateBook(dbItem))
@@ -115,14 +127,21 @@ class Home extends Component {
       let tmp = this.state.books_state.filter(
         (book) => book.id !== updatedBook.id
       );
+
       this.setState({
         books_state: [...tmp, updatedBook],
       });
 
       alert("Book is updated!");
-      this.editRef
-        .filter((elem) => elem[0] != null && elem[1] === id)[0][0]
-        .closeModal();
+      if (this.editRef.length > 0) {
+        var tmpArr = this.editRef.filter(
+          (elem) => elem[0] != null && elem[1] === id
+        );
+        console.log(tmpArr);
+        tmpArr[0][0].closeModal();
+      } else {
+        alert("something wrong with editRef");
+      }
     }
   };
 
@@ -204,7 +223,7 @@ class Home extends Component {
 
   filterData = () => {
     let arr = [];
-    if (this.state.filterDropdown != "" && this.state.filterInputVal != "") {
+    if (this.state.filterDropdown !== "" && this.state.filterInputVal !== "") {
       switch (this.state.filterDropdown) {
         case "name":
           arr = this.state.books_state.filter((rec) => {
@@ -228,23 +247,24 @@ class Home extends Component {
           arr = this.state.books_state.filter((rec) => {
             return rec.pages.includes(this.state.filterInputVal);
           });
+
           this.setState({ books_state: arr });
           break;
         case "rate":
           arr = this.state.books_state.filter((rec) => {
             return rec.rate == this.state.filterInputVal;
           });
+
           this.setState({ books_state: arr });
           break;
       }
     } else {
-      alert("Not all input filter fields are set");
+      alert("Please, fill in all necessary fields and try again.");
     }
   };
 
   clearFilter = () => {
     this.setState({
-      //books_state: [],
       selectedSortOption: "",
       filterInputVal: "",
       filterDropdown: "",
@@ -252,6 +272,7 @@ class Home extends Component {
     this.booksIsNotLoaded = true;
     this.votesIsNotLoaded = true;
     this.archivesIsNotLoaded = true;
+    this.editRef = [];
   };
 
   componentDidUpdate() {
@@ -287,19 +308,21 @@ class Home extends Component {
       <div className="sortBy radio">
         <label>
           <input
+            key="rate"
             type="radio"
             value="rate"
             checked={this.state.selectedSortOption === "rate"}
-            onClick={() => this.sortBy("rate")}
+            onChange={() => this.sortBy("rate")}
           />
           sort by rate
         </label>
         <label>
           <input
+            key="pages"
             type="radio"
             value="pages"
             checked={this.state.selectedSortOption === "pages"}
-            onClick={() => this.sortBy("pages")}
+            onChange={() => this.sortBy("pages")}
           />
           sort by pages
         </label>
@@ -330,15 +353,27 @@ class Home extends Component {
           </div>
         </div>
         <div className="filter-buttons">
-          <button className="btn" onClick={() => this.filterData()}>
+          <button
+            key="filter-data-btn"
+            className="btn"
+            onClick={() => this.filterData()}
+          >
             Filter
           </button>
-          <button className="btn" onClick={this.clearFilter}>
+          <button
+            key="filter-clear-btn"
+            className="btn"
+            onClick={this.clearFilter}
+          >
             Clear
           </button>
         </div>
       </div>
     );
+
+    if (this.editRef.length > 0) {
+      this.editRef = [];
+    }
     return (
       <div className="home-page content-wrap">
         <div className="sort-filter-wrapper">
@@ -357,6 +392,7 @@ class Home extends Component {
                   pages: "",
                   img: "",
                 }}
+                header={"Add new book"}
                 ref={(ref) => {
                   this.addBookRef = ref;
                 }}
@@ -377,6 +413,7 @@ class Home extends Component {
                     triggerText={updateBookText}
                     onSubmit={this.onEdit}
                     book={elem}
+                    header={"Edit book"}
                     ref={(ref) => {
                       this.editRef.push([ref, elem.id]);
                     }}

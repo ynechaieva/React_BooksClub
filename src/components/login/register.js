@@ -14,10 +14,6 @@ const mapStateToProps = (state) => {
 };
 
 export class Register extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.dispatch(fetchUsers());
   }
@@ -31,9 +27,9 @@ export class Register extends Component {
 
   handleRegister = (e) => {
     if (
-      this.state.username != "" &&
-      this.state.password != "" &&
-      this.state.email != ""
+      this.state.username !== "" &&
+      this.state.password !== "" &&
+      this.state.email !== ""
     ) {
       let user_id = this.props.users.length + 1;
       var newUser = {
@@ -43,8 +39,6 @@ export class Register extends Component {
         password: this.state.password,
         isAdmin: false,
       };
-
-      //db.addUser(newUser, (dbItem) => this.props.dispatch(addUser(dbItem)));
 
       this.setState({
         isLogged: true,
