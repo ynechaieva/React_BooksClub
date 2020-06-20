@@ -35,6 +35,7 @@ class Home extends Component {
     super(props);
     this.booksIsNotLoaded = true;
     this.votesIsNotLoaded = true;
+    this.archivesIsNotLoaded = true;
     this.editRef = [];
     this.state = {
       books_state: [],
@@ -47,6 +48,7 @@ class Home extends Component {
       if (performance.navigation.type == 1) {
         this.booksIsNotLoaded = true;
         this.votesIsNotLoaded = true;
+        this.archivesIsNotLoaded = true;
       }
     }
   }
@@ -80,13 +82,14 @@ class Home extends Component {
       alert("Book with such name is already exist!");
     } else {
       db.addBook(newBook, (dbItem) => this.props.dispatch(addBook(dbItem)));
+      newBook = { ...newBook, rate: "not voted" };
+      this.setState({ books_state: [...this.state.books_state, newBook] });
       this.addBookRef.closeModal();
     }
   };
 
   onEdit = (event, id) => {
-    event.preventDefault(event);
-
+    event.preventDefault();
     let updatedBook = {
       name: event.target.name.value,
       author: event.target.author.value,
@@ -96,14 +99,23 @@ class Home extends Component {
       img: "",
     };
 
+    let newRate = this.getRate(updatedBook);
     if (updatedBook.id === "undefined") {
       alert("Something goes wrong, can't update this book!");
     } else {
       db.updateBook(updatedBook, (dbItem) =>
         this.props.dispatch(updateBook(dbItem))
       );
-      alert("Book is updated!");
 
+      updatedBook = { ...updatedBook, rate: newRate };
+      let tmp = this.state.books_state.filter(
+        (book) => book.id !== updatedBook.id
+      );
+      this.setState({
+        books_state: [...tmp, updatedBook],
+      });
+
+      alert("Book is updated!");
       this.editRef
         .filter((elem) => elem[0] != null && elem[1] === id)[0][0]
         .closeModal();
@@ -162,8 +174,18 @@ class Home extends Component {
         this.setState({ books_state: arr, selectedSortOption: "pages" });
         break;
       case "rate":
-        arr = this.state.books_state.sort((a, b) => b.rate - a.rate);
-        this.setState({ books_state: arr, selectedSortOption: "rate" });
+        arr = this.state.books_state
+          .filter((book) => book.rate !== "not voted")
+          .sort((a, b) => b.rate - a.rate);
+        this.setState({
+          books_state: [
+            ...arr,
+            ...this.state.books_state.filter(
+              (book) => book.rate === "not voted"
+            ),
+          ],
+          selectedSortOption: "rate",
+        });
         break;
     }
   };
@@ -230,7 +252,7 @@ class Home extends Component {
   // };
 
   componentDidUpdate() {
-    let books_list = this.getNotArchived();
+    let books_list = this.props.books;
     if (this.booksIsNotLoaded && books_list.length !== 0) {
       this.state.books_state = books_list;
       this.forceUpdate();
@@ -244,6 +266,16 @@ class Home extends Component {
       this.state.books_state = this.buildBooksList();
       this.forceUpdate();
       this.votesIsNotLoaded = false;
+    }
+    if (
+      !this.booksIsNotLoaded &&
+      this.archivesIsNotLoaded &&
+      this.props.archive.length !== 0
+    ) {
+      this.state.books_state = this.getNotArchived();
+      this.state.books_state = this.buildBooksList();
+      this.forceUpdate();
+      this.archivesIsNotLoaded = false;
     }
   }
 
