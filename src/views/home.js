@@ -58,10 +58,15 @@ class Home extends Component {
     this.props.dispatch(fetchArchive());
   }
 
-  handleArchive = (book) => {
-    db.addToArchive(book, (dbItem) =>
+  handleArchive = (bookid) => {
+    db.addToArchive(bookid, (dbItem) =>
       this.props.dispatch(addToArchive(dbItem))
     );
+
+    let tmp = this.state.books_state.filter((rec) => rec.id !== bookid);
+    this.setState({
+      books_state: [...tmp],
+    });
     alert("book is added to archive");
   };
 
@@ -295,7 +300,6 @@ class Home extends Component {
             type="radio"
             value="pages"
             checked={this.state.selectedSortOption === "pages"}
-            //onChange={() => this.sortBy("pages")}
             onClick={() => this.sortBy("pages")}
           />
           sort by pages
