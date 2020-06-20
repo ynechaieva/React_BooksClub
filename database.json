@@ -65,7 +65,7 @@
     },
     {
       "name": "new test book 6",
-      "author": "author 6",
+      "author": "new author 6",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "pages": "1200",
       "id": 6,
@@ -80,6 +80,10 @@
     {
       "bookid": 5,
       "id": 2
+    },
+    {
+      "bookid": 6,
+      "id": 3
     }
   ],
   "votes": [
@@ -106,6 +110,12 @@
       "userid": 1,
       "vote": 3,
       "id": 4
+    },
+    {
+      "bookid": 6,
+      "userid": 3,
+      "vote": 4,
+      "id": 5
     }
   ],
   "dates": [
@@ -116,6 +126,10 @@
     {
       "date": "2020/06/19",
       "id": 2
+    },
+    {
+      "date": "2020/06/20",
+      "id": 3
     }
   ],
   "voted-dates": [
@@ -130,6 +144,12 @@
       "dateid": 1,
       "userid": 3,
       "vote": 1
+    },
+    {
+      "dateid": 3,
+      "userid": 3,
+      "vote": 1,
+      "id": 3
     }
   ]
 }

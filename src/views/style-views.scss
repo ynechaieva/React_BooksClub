@@ -1,0 +1,339 @@
+// --- mobile
+@media only screen and (max-width: 479px) {
+  .greetings {
+    margin: 0 0 0 1em;
+
+    .image {
+      width: 200px;
+    }
+
+    .image-text {
+      margin-left: 1em;
+    }
+  }
+
+  .meeting-point-page {
+    flex-direction: column;
+    align-items: center;
+
+    .calendar-area {
+      flex-direction: column;
+      align-items: center;
+      width: 300px;
+    }
+
+    .dates-area {
+      border: 1px solid darkgray;
+    }
+  }
+
+  .sort-filter-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 1em;
+    padding-left: 10px;
+
+    .sort-addBtn-style,
+    .filter {
+      margin-left: 0.5em;
+    }
+
+    .add-btn {
+      margin-top: 2em;
+    }
+
+    .filter {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 1em;
+
+      .filter-content {
+        width: 100%;
+        flex-direction: column;
+        margin-bottom: 10px;
+
+        .filter-dropdown,
+        .filter-input {
+          flex-direction: row;
+          align-items: center;
+          margin-bottom: 10px;
+          justify-content: space-between;
+        }
+      }
+
+      .filter-buttons {
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 10px;
+        justify-content: flex-start;
+      }
+    }
+  }
+}
+
+// --- ipad
+@media only screen and (min-width: 480px) and (max-width: 799px) {
+  .greetings {
+    margin: 0 0 0 1em;
+
+    .image {
+      width: 200px;
+    }
+
+    .image-text {
+      margin-left: 1em;
+    }
+  }
+
+  .meeting-point-page {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .calendar-area {
+      flex-direction: row;
+      justify-content: flex-start;
+      min-width: 350;
+
+      .calendar-btn {
+        padding-right: 0.5em;
+        min-width: 100px;
+      }
+    }
+
+    .dates-area {
+      border: none;
+    }
+  }
+
+  .sort-filter-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 1em;
+    padding-left: 10px;
+
+    .sort-addBtn-style,
+    .filter {
+      margin-left: 0.5em;
+    }
+
+    .add-btn {
+      margin-top: 2em;
+    }
+
+    .filter {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 1em;
+
+      .filter-content {
+        width: 100%;
+        flex-direction: column;
+        margin-bottom: 10px;
+
+        .filter-dropdown,
+        .filter-input {
+          flex-direction: row;
+          align-items: center;
+          margin-bottom: 10px;
+          justify-content: space-between;
+        }
+      }
+
+      .filter-buttons {
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 10px;
+        justify-content: flex-start;
+      }
+    }
+  }
+}
+
+// --- desctop
+@media only screen and (min-width: 800px) {
+  .greetings {
+    margin: 0 0 0 2em;
+
+    .image {
+      width: 250px;
+    }
+
+    .image-text {
+      margin-left: 1.5em;
+    }
+  }
+
+  .meeting-point-page {
+    flex-direction: row;
+    justify-content: flex-start;
+
+    .calendar-area {
+      flex-direction: row;
+      justify-content: flex-start;
+      width: 600px;
+    }
+
+    .dates-area {
+      margin-top: 0px;
+      border: 1px solid darkgray;
+    }
+  }
+
+  .sort-filter-wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 1em;
+
+    .sort-addBtn-style {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-right: 3em;
+
+      .sortBy {
+        margin-bottom: 10px;
+      }
+
+      .add-btn {
+        margin-bottom: 10px;
+      }
+    }
+
+    .filter {
+      flex-direction: column;
+      margin-left: 2em;
+
+      .filter-content {
+        flex-direction: column;
+        margin-bottom: 10px;
+
+        .filter-dropdown,
+        .filter-input {
+          align-items: center;
+          margin-bottom: 10px;
+          justify-content: space-between;
+        }
+      }
+
+      .filter-buttons {
+        flex-direction: row;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+// --- sort-filter
+.sort-filter-wrapper {
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid black;
+
+  .sortBy {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .filter {
+    display: flex;
+
+    .filter-dropdown,
+    .filter-input,
+    .filter-buttons {
+      display: flex;
+    }
+
+    .Dropdown-root,
+    .Dropdown-control,
+    .f-input {
+      width: 210px;
+      height: 36px;
+    }
+
+    .Dropdown-placeholder,
+    .f-input {
+      padding: 5px 10px;
+    }
+
+    .Dropdown-root,
+    .f-input {
+      margin: 0 5px 0 5px;
+    }
+
+    .Dropdown-control {
+      border: 1px solid black;
+      padding: 0;
+    }
+  }
+}
+
+// --- common
+.greetings {
+  font-size: 1.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  .image img {
+    width: 100%;
+  }
+}
+
+.books-list {
+  padding: 0;
+
+  .book-item {
+    margin: 1em 2em 1em 2em;
+    padding: 1em 2em 1em 2em;
+    box-shadow: 5px 10px;
+    border: 1px solid black;
+
+    .book-name {
+      font-weight: bold;
+    }
+  }
+}
+
+// --- rating component
+.rating-container {
+  .icon {
+    width: 1.5em;
+    height: 1.5em;
+    padding-right: 5px;
+    margin-top: 0.5em;
+  }
+}
+
+// --- meet-page
+.meeting-point-page {
+  display: flex;
+
+  .calendar-area {
+    display: flex;
+
+    .calendar-btn {
+      padding-right: 1em;
+    }
+
+    .datepicker {
+      padding-top: 1em;
+    }
+  }
+
+  .dates-area {
+    width: 300px;
+  }
+
+  .calendar-area,
+  .dates-area {
+    margin: 0 1.5em 0px 1.5em;
+    padding: 1em 1.5em 1em 1.5em;
+  }
+
+  .calendar-area {
+    border: 1px solid darkgray;
+  }
+}
+//-----

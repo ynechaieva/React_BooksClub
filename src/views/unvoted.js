@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import Book from "../components/books/book";
 import { addVote } from "../actions";
 import { DbHandler } from "../dbHandler";
-import "./unvoted.scss";
 import { RatingComponent } from "../components/vote/rating";
 import sheriff from "../img/sheriff.png";
+import "./style-views.scss";
 
 const mapStateToProps = (state) => {
   return {
@@ -57,11 +57,11 @@ class UnvotedBooks extends Component {
 
     return (
       <div className="unvoted-page content-wrap">
-        <div className="unvoted-greetings">
-          <div className="sheriff">
+        <div className="greetings">
+          <div className="image">
             <img src={sheriff} />
           </div>
-          <div className="sheriff-text">Vote or die</div>
+          <div className="image-text">Vote or die</div>
         </div>
         <ul className="books-list">
           {unvoted.map((elem) => {

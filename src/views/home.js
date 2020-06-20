@@ -11,11 +11,10 @@ import {
   fetchVotes,
   fetchArchive,
 } from "../actions";
-import "./home.scss";
 import { DbHandler } from "../dbHandler";
-import book_img from "../img/notebook.png";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
+import "./style-views.scss";
 
 const db = new DbHandler();
 const addNewBookText = "add book";
@@ -280,31 +279,35 @@ class Home extends Component {
   }
 
   render() {
-    return (
-      <div className="home-page content-wrap">
-        <div className="sort-filter-wrapper">
-          <div className="sortBy radio">
-            <label>
-              <input
-                type="radio"
-                value="rate"
-                checked={this.state.selectedSortOption === "rate"}
-                onClick={() => this.sortBy("rate")}
-              />
-              sort by rate
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="pages"
-                checked={this.state.selectedSortOption === "pages"}
-                //onChange={() => this.sortBy("pages")}
-                onClick={() => this.sortBy("pages")}
-              />
-              sort by pages
-            </label>
-          </div>
-          <div className="filterBy">
+    var SortComponent = (
+      <div className="sortBy radio">
+        <label>
+          <input
+            type="radio"
+            value="rate"
+            checked={this.state.selectedSortOption === "rate"}
+            onClick={() => this.sortBy("rate")}
+          />
+          sort by rate
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="pages"
+            checked={this.state.selectedSortOption === "pages"}
+            //onChange={() => this.sortBy("pages")}
+            onClick={() => this.sortBy("pages")}
+          />
+          sort by pages
+        </label>
+        <div className="divider"></div>
+      </div>
+    );
+
+    var FilterComponent = (
+      <div className="filter">
+        <div className="filter-content">
+          <div className="filter-dropdown">
             <label>Filter by</label>
             <Dropdown
               className="dropdown"
@@ -313,63 +316,83 @@ class Home extends Component {
               //onChange={this.handleChangeDropdown}
               placeholder="select an option"
             />
+          </div>
+          <div className="filter-input">
             <label> with value</label>
             <input
-              className="filter-input"
+              className="f-input"
               value={this.state.filterInputVal}
               //onChange={this.handleChangeFilter}
             />
-            <button
-              className="btn filter-btn"
-              // onClick={this.filterData}
-            >
-              Filter
-            </button>
-            <button
-              className="btn cler-sort-filter-btn"
-              //onClick={this.clearFilter}
-            >
-              Clear
-            </button>
           </div>
         </div>
-        <FormContainer
-          key={"add-book-modal"}
-          triggerText={addNewBookText}
-          onSubmit={this.onSubmit}
-          book={{ name: "", author: "", description: "", pages: "", img: "" }}
-          ref={(ref) => {
-            this.addBookRef = ref;
-          }}
-          btn-style={{ color: "red" }}
-        />
-        <ul>
+        <div className="filter-buttons">
+          <button
+            className="btn"
+            // onClick={this.filterData}
+          >
+            Filter
+          </button>
+          <button
+            className="btn"
+            //onClick={this.clearFilter}
+          >
+            Clear
+          </button>
+        </div>
+      </div>
+    );
+    return (
+      <div className="home-page content-wrap">
+        <div className="sort-filter-wrapper">
+          {FilterComponent}
+          <div className="sort-addBtn-style">
+            {SortComponent}
+            <div className="add-btn">
+              <FormContainer
+                key={"add-book-modal"}
+                triggerText={addNewBookText}
+                onSubmit={this.onSubmit}
+                book={{
+                  name: "",
+                  author: "",
+                  description: "",
+                  pages: "",
+                  img: "",
+                }}
+                ref={(ref) => {
+                  this.addBookRef = ref;
+                }}
+                btn-style={{ color: "red" }}
+              />
+            </div>
+          </div>
+        </div>
+
+        <ul className="books-list">
           {this.state.books_state.map((elem) => {
             return (
               <div className="full-book-item">
                 <li key={elem.id} id={elem.id} className="book-item">
-                  {/* <div className="book-image">
-                    <img src={book_img} alt="book-img" />
-                  </div> */}
                   <Book showVotes={true} book={elem} rate={elem.rate} />
+                  <FormContainer
+                    key={"edit-book-modal" + elem.id}
+                    triggerText={updateBookText}
+                    onSubmit={this.onEdit}
+                    book={elem}
+                    ref={(ref) => {
+                      this.editRef.push([ref, elem.id]);
+                    }}
+                  />
+                  <button
+                    key={"archive-btn" + elem.id}
+                    type="button"
+                    className="btn"
+                    onClick={() => this.handleArchive(elem.id)}
+                  >
+                    archive book
+                  </button>
                 </li>
-                <FormContainer
-                  key={"edit-book-modal" + elem.id}
-                  triggerText={updateBookText}
-                  onSubmit={this.onEdit}
-                  book={elem}
-                  ref={(ref) => {
-                    this.editRef.push([ref, elem.id]);
-                  }}
-                />
-                <button
-                  key={"archive-btn" + elem.id}
-                  type="button"
-                  className="btn"
-                  onClick={() => this.handleArchive(elem.id)}
-                >
-                  archive book
-                </button>
               </div>
             );
           })}

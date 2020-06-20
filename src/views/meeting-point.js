@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./meeting-point.scss";
+import "./style-views.scss";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import format from "date-fns/format";
@@ -86,19 +86,23 @@ class MeetingPoint extends Component {
     return (
       <div className="meeting-point-page content-wrap">
         <div className="calendar-area">
-          <label>Select date to discussion a book:</label>
-          <DatePicker
-            selected={this.state.startDate}
-            dateFormat="yyyy/MM/dd"
-            className="datepicker"
-            minDate={new Date()}
-            onSelect={(value) => this.handleChange(value)}
-            inline
-          />
-          <div>
+          <div className="calendar-btn">
+            <p>
+              Choose any date in calendar which is sutable for you to discussion
+              a book:
+            </p>
             <button type="submit" className="btn" onClick={this.addDate}>
-              select date
+              add date
             </button>
+          </div>
+          <div className="datepicker">
+            <DatePicker
+              selected={this.state.startDate}
+              dateFormat="yyyy/MM/dd"
+              minDate={new Date()}
+              onSelect={(value) => this.handleChange(value)}
+              inline
+            />
           </div>
         </div>
         <div className="dates-area">

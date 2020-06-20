@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Book from "../components/books/book";
+import image from "../img/archive-books.png";
+import "./style-views.scss";
 
 const mapStateToProps = (state) => {
   return {
@@ -33,7 +35,13 @@ class Archive extends Component {
 
     return (
       <div className="archive-page content-wrap">
-        <ul>
+        <div className="greetings">
+          <div className="image">
+            <img src={image} />
+          </div>
+          <div className="image-text">Archived books</div>
+        </div>
+        <ul className="books-list">
           {archive_list.map((elem) => {
             return (
               <>

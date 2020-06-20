@@ -25,9 +25,9 @@ export class DatesTable extends Component {
     var component = (
       <>
         <div className="dates-table">
-          <div className="most-rated-date">
+          <p style={{ "font-weight": "bold" }}>
             Most rated date: {this.mostRatedDate()}
-          </div>
+          </p>
           <ul className="dates-list">
             {this.props.dates.map((elem) => {
               let rate = this.props.votedDates.filter((rec) => {

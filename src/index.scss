@@ -8,6 +8,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
   font-size: 18px;
+  width: 100%;
 }
 
 *,
@@ -19,9 +20,9 @@ body {
 }
 
 .App {
-  width: 90%;
+  width: 100%;
   max-width: 700px;
-  margin: 2em auto;
+  //margin: 2em auto;
 }
 
 .modal-cover {

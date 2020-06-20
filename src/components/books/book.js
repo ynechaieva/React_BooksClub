@@ -10,12 +10,14 @@ export default class Book extends Component {
     let votesDiv;
 
     if (this.props.showVotes) {
-      votesDiv = <div className="book-votes">{this.props.rate}</div>;
+      votesDiv = <div className="book-votes">rate: {this.props.rate}</div>;
     }
     var component = (
       <>
         <div className="book-short-content">
-          <div className="book-name book-elem">{this.props.book.name}</div>
+          <div className="book-name book-elem">
+            <p>{this.props.book.name}</p>
+          </div>
           <div className="book-author book-elem">{this.props.book.author}</div>
           <div className="book-pages book-elem">
             {this.props.book.pages} pages
@@ -23,7 +25,7 @@ export default class Book extends Component {
           {votesDiv}
         </div>
         <div className="book-description book-elem">
-          {this.props.book.description}
+          <p>{this.props.book.description}</p>
         </div>
       </>
     );
