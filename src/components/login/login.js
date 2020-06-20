@@ -23,11 +23,13 @@ class Login extends Component {
   };
 
   handleLogin = (e) => {
+    let showAlert = true;
     this.props.users.map((item) => {
       if (
         this.state.username === item.username &&
         this.state.password === item.password
       ) {
+        showAlert = false;
         this.setState({
           isLogged: true,
         });
@@ -42,6 +44,9 @@ class Login extends Component {
         );
       }
     });
+    if (showAlert) {
+      alert("Your credentials are incorrect. Please, try again.");
+    }
   };
 
   handleChangeUsername = (e) => {

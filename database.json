@@ -206,6 +206,12 @@
       "userid": 4,
       "vote": 1,
       "id": 5
+    },
+    {
+      "dateid": 3,
+      "userid": 1,
+      "vote": 2,
+      "id": 6
     }
   ]
 }
